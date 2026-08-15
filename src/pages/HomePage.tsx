@@ -1,13 +1,18 @@
-import { Link } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom'
 
 export function HomePage() {
+  const navigate = useNavigate()
+
   return (
-    <div >
+    <div className="home-page">
       <h1>Meine Website</h1>
-      <Link to="/personal" className="category-box">
+      <button
+        type="button"
+        className="category-box"
+        onClick={() => navigate('/personal')}
+      >
         Persönliches
-      </Link>
+      </button>
     </div>
   )
 }

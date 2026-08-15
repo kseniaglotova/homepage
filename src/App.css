@@ -9,13 +9,25 @@ body {
   min-height: 100vh;
 }
 
+.home-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: uppercase;
+  align-items: center;
+  gap: 20px;
+}
 
 .category-box,
 .back-link {
-  /* padding: 1px 8px 10px 8px; */
+  display: inline-block;
+  padding: 18px 28px;
   border: 2px solid #000;
   color: #000;
   background: #fff;
   text-decoration: none;
+  cursor: pointer;
+  font: inherit;
 }
 
