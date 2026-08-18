@@ -30,8 +30,7 @@ export function Test() {
       <div className="test-text">
         <h2>Test Page</h2>
         <p>
-          Hier läuft eine Bildliste vertikal und endlos durch. Links stehen die Bilder
-          in einer langen Spalte, rechts ein einfacher Textblock.
+          Hier sind Bilder, welche endlos durchlaufen.
         </p>
       </div>
     </div>
