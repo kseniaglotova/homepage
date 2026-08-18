@@ -9,6 +9,31 @@ body {
   min-height: 100vh;
 }
 
+.top-nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  color:#000;
+  background: #fff;
+  z-index: 100;
+  
+}
+.nav-link {
+  text-decoration: none;
+  color: #000;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.nav-link.active {
+  background: #000;
+  color: #fff;
+}
+
 .home-page {
   min-height: 100vh;
   display: flex;
