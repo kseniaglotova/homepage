@@ -33,6 +33,13 @@ export function Test() {
           Hier sind Bilder, welche endlos durchlaufen.
         </p>
       </div>
+
+      <div className="test-text">
+        <p>hallo</p>
+      </div>
+
+      
     </div>
+    
   )
 }

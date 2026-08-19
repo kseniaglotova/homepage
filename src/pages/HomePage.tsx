@@ -4,11 +4,12 @@ export function HomePage() {
   const navigate = useNavigate()
 
   return (
+    
     <div className="home-page">
         <section className="hero-banner">
             <div className="hero-content">
                 <div className="hero-title">
-                    <h1>Meine Website</h1>
+                    <h1>Ksenia Glotova</h1>
                 </div>
                 <div className="hero-meta">
                     <p className="hero-meta-strong">Hi, ich bin Ksenia Glotova - Spezialist für destruktives Refactoring und autodidaktisches Try-and-Error</p>
