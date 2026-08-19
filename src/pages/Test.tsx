@@ -13,17 +13,13 @@ const repeatedImages: string[] = [...images, ...images];
 const images2: string[] = [
   "/food/bowl.jpg",
   "/food/pizza1.jpg",
+    "/food/bowl.jpg",
+  "/food/pizza1.jpg",
 ];
 
 const repeatedImages2: string[] = [...images2, ...images2];
 
-const images3: string[] = [
-  "/oldpics/estonia-beach.jpg",
-  "/oldpics/gymnastics.jpg",
-  "/oldpics/towel.JPG",
-];
 
-const repeatedImages3: string[] = [...images3, ...images3];
 
 const images4: string[] = [
   "/places/cassis-sea.jpg",
@@ -75,19 +71,6 @@ const repeatedImages4: string[] = [...images4, ...images4];
         </div>
       </div>
 
-      <div className="image-rail" aria-label="Scrolling image gallery">
-        <div className="image-track">
-          {repeatedImages3.map((image, index) =>
-            (
-              <img
-                key={index} 
-                src={image} 
-                alt={"Index: "+index} 
-               />
-            )
-          )}
-        </div>
-      </div>
 
       <div className="image-rail" aria-label="Scrolling image gallery">
         <div className="image-track">
