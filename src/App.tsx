@@ -4,6 +4,7 @@ import { PersonalPage } from './pages/PersonalPage';
 import { HomePage } from './pages/HomePage';
 import { Links } from './pages/Links';
 import { Education } from './pages/Education';
+import { Motorrad } from './pages/Motorrad';
 import './App.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <NavLink to="/test" className="nav-link">Test</NavLink>
         <NavLink to="/links" className="nav-link">Links</NavLink>
         <NavLink to="/education" className="nav-link">Education</NavLink>
+        <NavLink to="/motorrad" className="nav-link">Motorrad</NavLink>
       </nav>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -22,6 +24,7 @@ function App() {
         <Route path="/test" element={<Test />} />
         <Route path="/links" element={<Links />} />
         <Route path="/education" element={<Education />} />
+        <Route path="/motorrad" element={<Motorrad />} />
 
       </Routes>
     </BrowserRouter>

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import './HomePage.css'
 
 export function HomePage() {
   const navigate = useNavigate()

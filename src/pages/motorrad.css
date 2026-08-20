@@ -1,0 +1,87 @@
+.motorcycle-page {
+  background: #fff;
+  color: #000;
+}
+
+.motorcycle-hero {
+  display: flex;
+  
+  justify-content: center;
+}
+
+.motorcycle-hero h1 {
+  position: absolute;
+   z-index: 0;
+  color: #c00000;
+  font-size: clamp(3rem, 9vw, 8rem);
+  font-weight: 800;
+  margin-top: -10px;
+}
+
+.motorcycle-image {
+  z-index: 1;
+  max-height: 300px;
+  margin-top: 50px;
+}
+
+.motorcycle-tabs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.motorcycle-tabs button {
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: #555;
+  padding: 14px 16px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.motorcycle-tabs button:hover {
+  color: #c00000;
+}
+
+.motorcycle-tabs button.active {
+  border-bottom-color: #c00000;
+  color: #c00000;
+  font-weight: 700;
+}
+
+.motorcycle-content {
+  text-align: center;
+}
+
+.motorcycle-content h2 {
+  color: #c00000;
+  font-size: 2.5rem;
+}
+
+
+@media (max-width: 700px) {
+.motorcycle-content{
+    justify-content: center;
+}
+
+.motorcycle-hero h1{
+margin-top: 0
+}
+
+.motorcycle-image{
+    width:50%;
+}
+
+  .motorcycle-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .motorcycle-tabs button {
+    flex: 0 0 auto;
+    padding: 12px 10px;
+    font-size: 0.85rem;
+  }
+}

@@ -3,7 +3,7 @@ import './Test.css'
 export function Test() {
 const images: string[] = [
   "/moped-test.jpg",
-  "motorrad-bild.jpg",
+  "/motorrad-bild.jpg",
   "/motorrad-bild2.jpg",
   "/homepage-background.jpg",  
 ];
@@ -12,9 +12,7 @@ const repeatedImages: string[] = [...images, ...images];
 
 const images2: string[] = [
   "/food/bowl.jpg",
-  "/food/pizza1.jpg",
-    "/food/bowl.jpg",
-  "/food/pizza1.jpg",
+  "/food/pizza1.jpg"
 ];
 
 const repeatedImages2: string[] = [...images2, ...images2];
