@@ -2,9 +2,9 @@ import './Test.css'
 
 export function Test() {
 const images: string[] = [
-  "/moped-test.jpg",
-  "/motorrad-bild.jpg",
-  "/motorrad-bild2.jpg",
+  "/bike/moped-test.jpg",
+  "/bike/motorrad-bild.jpg",
+  "/bike/motorrad-bild2.jpg",
   "/homepage-background.jpg",  
 ];
 
@@ -20,11 +20,11 @@ const repeatedImages2: string[] = [...images2, ...images2];
 
 
 const images4: string[] = [
-  "/places/cassis-sea.jpg",
-  "/places/france-cassis.jpg",
-  "/places/moskau-city.jpg",
-  "/places/moskau.jpg",
-  "/places/sankt-petersburg.jpg",
+  "/places/france/cassis-sea.jpg",
+  "/places/france/france-cassis.jpg",
+  "/places/russia/moskau-city.jpg",
+  "/places/russia/moskau.jpg",
+  "/places/russia/sankt-petersburg.jpg",
 ];
 
 const repeatedImages4: string[] = [...images4, ...images4];
