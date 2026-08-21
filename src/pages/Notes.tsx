@@ -7,7 +7,7 @@ const noteCategories = [
   {
     id: 'rides',
     title: 'Rides',
-    image: '/motorrad-bild.jpg',
+    image: '/bike/motorrad-bild.jpg',
   },
   {
     id: 'food',
@@ -17,7 +17,7 @@ const noteCategories = [
   {
     id: 'places',
     title: 'Places',
-    image: '/places/moskau.jpg',
+    image: '/places/russia/moskau.jpg',
   },
   {
     id: 'projects',
