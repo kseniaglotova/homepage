@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { mainCategories } from '../mainCategories'
 import './HomePage.css'
 
 export function HomePage() {
-  const navigate = useNavigate()
 
   return (
     
@@ -19,35 +19,19 @@ export function HomePage() {
             </div>    
         </section>
         
-        <section className="button-section">
-            <div className="button-grid">
-                <button
-                    type="button"
+    <section className="button-section">
+        <div className="button-grid">
+            {mainCategories.map((category) => (
+                <Link
+                    key={category.path}
+                    to={category.path}
                     className="category-box"
-                    onClick={() => navigate('/personal')}>
-                    Persönliches
-                </button>
-                    
-                    <button
-                    type="button"
-                    className="category-box"
-                    onClick={() => navigate('/test')}>
-                    Test
-                </button>
-                <button
-                    type="button"
-                    className="category-box"
-                    onClick={() => navigate('/links')}>
-                    Links
-                </button>
-                <button
-                    type="button"
-                    className="category-box"
-                    onClick={() => navigate('/education')}>
-                    Education
-                </button>
-            </div>
-        </section>
+                >
+                {category.label}
+                </Link>
+        ))}
+        </div>
+    </section>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './motorrad.css'
+import './Bike.css'
 
 const sections = {
   'the bike': {
@@ -157,7 +157,7 @@ const sectionNames = [
   'my sv 650',
 ] as const
 
-export function Motorrad() {
+export function Bike() {
   const [activeSection, setActiveSection] =
     useState<(typeof sectionNames)[number]>('the bike')
 

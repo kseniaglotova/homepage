@@ -1,0 +1,97 @@
+
+.notes-header {
+  width: min(1180px, 100%);
+  margin: 0 auto 42px;
+}
+
+.notes-intro-small {
+  margin: 0 0 10px;
+  color: #9a3d25;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.notes-header h1 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.notes-intro {
+}
+
+.notes-grid {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.note-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1.08 / 1;
+  color: #fff;
+  border-radius: 14px;
+  background: #222;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.note-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  z-index: 0;
+}
+
+.note-card-overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 35% 0 0;
+  background: linear-gradient(to bottom, transparent,rgba(0, 0, 0, 0.82));
+}
+
+.note-card-title {
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+  bottom: 18px;
+  left: 20px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.note-card:hover {
+  transform: translateY(-6px);
+}
+
+.note-card:hover .note-card-image {
+  transform: scale(1.06);
+}
+
+@media (max-width: 900px) {
+  .notes-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+    
+  }
+  .note-card{margin: 10px 10px}
+}
+
+@media (max-width: 560px) {
+  
+  .notes-grid {
+    grid-template-columns: 1fr;
+    margin: 10px 10px
+  }
+
+  .note-card {
+    aspect-ratio: 1.35 / 1;
+    margin: 10px 10px;
+  }
+}

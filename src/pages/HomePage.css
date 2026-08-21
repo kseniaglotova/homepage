@@ -58,7 +58,7 @@ width: 100%;
   width: min(1200px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
   gap: 18px;
 }
 
@@ -74,7 +74,7 @@ width: 100%;
   }
 
   .button-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   .category-box {
     margin-bottom: -20px;
@@ -82,13 +82,14 @@ width: 100%;
 }
 
 .category-box{
-min-height: 50px;
+  min-height: 50px;
   border: 1px solid #fff;
   border-radius: 18px;
   color: #ffffff;
-  padding: 10px;
-  text-align: center;
+  display: grid;
+  place-content: center;
   cursor: pointer;
+  text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   background: linear-gradient(135deg, #c10000, #001d7e);
   margin-top: 10px;

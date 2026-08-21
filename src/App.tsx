@@ -1,31 +1,41 @@
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
-import { Test } from './pages/Test.tsx';
-import { PersonalPage } from './pages/PersonalPage';
-import { HomePage } from './pages/HomePage';
-import { Links } from './pages/Links';
-import { Education } from './pages/Education';
-import { Motorrad } from './pages/Motorrad';
+import { HomePage } from './pages/HomePage'
+import { mainCategories } from './mainCategories'
 import './App.css'
 
 function App() {
   return (
     <BrowserRouter>
       <nav className="top-nav">
-        <NavLink to="/" className="nav-link">Home</NavLink>
-        <NavLink to="/personal" className="nav-link">Persönliches</NavLink>
-        <NavLink to="/test" className="nav-link">Test</NavLink>
-        <NavLink to="/links" className="nav-link">Links</NavLink>
-        <NavLink to="/education" className="nav-link">Education</NavLink>
-        <NavLink to="/motorrad" className="nav-link">Motorrad</NavLink>
+        <NavLink to="/" className="nav-link">
+          Home
+        </NavLink>
+
+        {mainCategories.map((category) => (
+          <NavLink
+            key={category.path}
+            to={category.path}
+            className="nav-link"
+          >
+            {category.label}
+          </NavLink>
+        ))}
       </nav>
+
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/personal" element={<PersonalPage />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="/links" element={<Links />} />
-        <Route path="/education" element={<Education />} />
-        <Route path="/motorrad" element={<Motorrad />} />
 
+        {mainCategories.map((category) => {
+          const Page = category.component
+
+          return (
+            <Route
+              key={category.path}
+              path={category.path}
+              element={<Page />}
+            />
+          )
+        })}
       </Routes>
     </BrowserRouter>
   )
