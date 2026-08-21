@@ -106,19 +106,20 @@
   border: 1px solid #d8d5ce;
   border-radius: 16px;
   display: flex;
+  color: #000;
   flex-direction: column;
   justify-content: space-between;
   background: #fff;
   text-decoration: none;
   animation: card-in 0.55s ease-out both;
   animation-delay: calc(var(--card-index) * 70ms);
-  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease;
 }
 
 .category-box:hover {
   transform: translateY(-7px);
   color: #fff;
-  background: #000000;
+  background: #b9b49e;
 }
 
 .category-number {
@@ -145,14 +146,18 @@
   transform: translate(3px, -3px);
 }
 
+.category-box:hover .category-number {
+  color: #fff;
+}
+
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes card-in {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media (max-width: 900px) {
