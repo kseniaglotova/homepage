@@ -3,35 +3,45 @@ import { mainCategories } from '../mainCategories'
 import './HomePage.css'
 
 export function HomePage() {
+    return (
+        <main className="home-page">
+            <section className="hero-banner">
+                <div className="hero-content">
+                    <div className="hero-title">
+                        <p className="hero-kicker">PERSONAL SPACE / 2026</p>
+                        <h1>Ksenia<br />Glotova</h1>
+                    </div>
 
-  return (
-    
-    <div className="home-page">
-        <section className="hero-banner">
-            <div className="hero-content">
-                <div className="hero-title">
-                    <h1>Ksenia Glotova</h1>
+                    <div className="hero-meta">
+                        <p className="hero-meta-strong">Learning by doing.</p>
+                        <p className="hero-meta-small">
+                            Hallo, das ist meine Website.
+                        </p>
+                    </div>
                 </div>
-                <div className="hero-meta">
-                    <p className="hero-meta-strong">Hi, ich bin Ksenia Glotova - Spezialist für destruktives Refactoring und autodidaktisches Try-and-Error</p>
-                    <p className="hero-meta-small">Mein Workflow besteht aus der evolutionären Code-Generierung durch akutes Learning by Doing. Ich beherrsche die Kunst, semantisches HTML und CSS durch destruktives Refactoring komplett auseinanderzunehmen, um überhaupt zu kapieren, wie Webdesign funktioniert.</p>
+            </section>
+
+            <section className="button-section">
+                <div className="section-heading">
+                    <p className="section-kicker">EXPLORE</p>
+                    <h2>Meine Bereiche</h2>
                 </div>
-            </div>    
-        </section>
-        
-    <section className="button-section">
-        <div className="button-grid">
-            {mainCategories.map((category) => (
-                <Link
-                    key={category.path}
-                    to={category.path}
-                    className="category-box"
-                >
-                {category.label}
-                </Link>
-        ))}
-        </div>
-    </section>
-    </div>
-  )
+
+                <div className="button-grid">
+                    {mainCategories.map((category, index) => (
+                        <Link
+                            key={category.path}
+                            to={category.path}
+                            className="category-box"
+                            style={{ '--card-index': index } as React.CSSProperties}
+                        >
+                            <span className="category-number">0{index + 1}</span>
+                            <span className="category-label">{category.label}</span>
+                            <span className="category-arrow">↗</span>
+                        </Link>
+                    ))}
+                </div>
+            </section>
+        </main>
+    )
 }
