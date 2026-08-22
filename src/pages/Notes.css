@@ -2,10 +2,10 @@
 .notes-header {
   width: min(1180px, 100%);
   margin: 0 auto 42px;
+  padding-left: 20px;
 }
 
 .notes-intro-small {
-  margin: 0 0 10px;
   color: #9a3d25;
   font-size: 0.75rem;
   font-weight: 700;

@@ -3,6 +3,8 @@ import { HomePage } from './pages/HomePage'
 import { mainCategories } from './mainCategories'
 import './App.css'
 
+import { NoteCategory } from './pages/NoteCategory'
+
 function App() {
   return (
     <BrowserRouter>
@@ -36,6 +38,7 @@ function App() {
             />
           )
         })}
+        <Route path="/notes/:categoryy" element={<NoteCategory />} />
       </Routes>
     </BrowserRouter>
   )
