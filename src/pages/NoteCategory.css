@@ -38,12 +38,10 @@
 }
 
 .horizontal-image {
-  width: 280px;
-  height: 360px;
-  flex: 0 0 280px;
+  height: 200px;
+  flex: 0 0 200px;
   object-fit: cover;
   border-radius: 14px;
-  display: block;
 }
 
 @keyframes move-horizontal {

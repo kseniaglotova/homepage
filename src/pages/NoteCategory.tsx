@@ -2,13 +2,8 @@ import { useParams } from 'react-router-dom'
 import './NoteCategory.css'
 
 const imageModules = import.meta.glob(
-  '../assets/notes/*/*.{jpg,jpeg,png,webp}',
-  {
-    eager: true,
-    query: '?url',
-    import: 'default',
-  },
-) as Record<string, string>
+    '../assets/notes/*/*.{jpg,jpeg,png,webp}',
+    {eager: true, query: '?url', import: 'default'}) as Record<string, string>
 
 export function NoteCategory() {
   const { categoryy } = useParams()
@@ -17,7 +12,7 @@ export function NoteCategory() {
     .filter(([path]) => path.includes(`/notes/${categoryy}/`))
     .map(([, imageUrl]) => imageUrl)
 
-  const repeatedImages = [...images, ...images]
+  const repeatedImages = [...images, ...images, ...images, ...images,]
   const title = categoryy ? categoryy[0].toUpperCase() + categoryy.slice(1) : 'Notes'
 
   return (
