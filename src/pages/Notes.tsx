@@ -7,12 +7,12 @@ const noteCategories = [
   {
     id: 'rides',
     title: 'Rides',
-    image: '/src/assets/notes/rides/motorrad-bild.jpg',
+    image: '/motorrad-bild.jpg',
   },
   {
     id: 'food',
     title: 'Food',
-    image: '/src/assets/notes/food/pizza1.jpg',
+    image: '/pizza1.jpg',
   },
   {
     id: 'places',
