@@ -40,7 +40,30 @@ function App() {
         })}
         <Route path="/notes/:categoryy" element={<NoteCategory />} />
       </Routes>
+
+      <footer className="footer">
+        <div className="footer-inner">
+          <p className="footer-copy">
+            © 2026 Ksenia Glotova
+          </p>
+
+          <nav className="footer-links">
+            <a href="https://www.instagram.com/kseniaglotovaa/">
+              Instagram
+            </a>
+
+            <a href="mailto:ksenia.a.glotova@gmail.com">
+              E-Mail
+            </a>
+
+            <a href="tel:+4915140314269">
+              Telefon
+            </a>
+          </nav>
+        </div>
+    </footer>
     </BrowserRouter>
+
   )
 }
 

@@ -34,3 +34,52 @@ body {
   color: #fff;
 }
 
+.footer {
+  padding: 48px 32px;
+  background: #17181f;
+}
+
+.footer-inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-copy {
+  margin: 0;
+  color: #a8a69e;
+  font-size: 0.85rem;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #d5b36a;
+}
+@media (max-width: 650px) {
+  .footer {
+    padding: 30px 20px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .footer-links {
+    gap: 14px 20px;
+  }
+}

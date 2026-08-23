@@ -17,18 +17,19 @@ const noteCategories = [
   {
     id: 'places',
     title: 'Places',
-    image: '/notes-icons/russia/moskau.jpg',
+    image: '/notes-icons/moskau.jpg',
   },
+  /*
   {
     id: 'projects',
     title: 'Projects',
     image: '/homepage-background.jpg',
-  },
+  },*/
 ]
 
 export function Notes() {
   return (
-    <main>
+    <main className="notes-page">
       <header className="notes-header">
         <p className="notes-intro-small">PERSONAL ARCHIVE</p>
         <h1>Notes</h1>

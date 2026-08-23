@@ -1,8 +1,13 @@
 
+.notes-page{
+    background-color: #f1f0ec;
+    padding-bottom: 30px;
+}
 .notes-header {
   width: min(1180px, 100%);
   margin: 0 auto 42px;
   padding-left: 20px;
+  padding-top: 20px;
 }
 
 .notes-intro-small {
