@@ -7,7 +7,7 @@ const imageModules = import.meta.glob(
     {eager: true, query: '?url', import: 'default'}) as Record<string, string>
 
 export function NoteCategory() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const { categoryy } = useParams()
 
   const images = Object.entries(imageModules)
@@ -32,20 +32,52 @@ export function NoteCategory() {
               src={image}
               alt={`${title} Bild ${index + 1}`}
               className="horizontal-image"
-              onClick={() => setSelectedImage(image)}
+              onClick={() => setSelectedIndex(index % images.length)}
             />
           ))}
         </div>
       </section>
 
       
-      {selectedImage && (
-  <div className="image-modal" onClick={() => setSelectedImage(null)}>
+      {selectedIndex !== null && (
+  <div className="image-modal" onClick={() => setSelectedIndex(null)}>
+       <button
+      type="button"
+      className="modal-arrow modal-arrow-left"
+      onClick={(event) => {
+        event.stopPropagation()
+
+        setSelectedIndex(
+          selectedIndex === 0
+            ? images.length - 1
+            : selectedIndex - 1
+        )
+      }}
+      aria-label="Vorheriges Bild"
+    >
+      ←
+    </button>
     <img
-      src={selectedImage}
+      src={images[selectedIndex]}
       alt={`${title} vergrößert`}
       className="modal-image"
     />
+    <button
+      type="button"
+      className="modal-arrow modal-arrow-right"
+      onClick={(event) => {
+        event.stopPropagation()
+
+        setSelectedIndex(
+          selectedIndex === images.length - 1
+            ? 0
+            : selectedIndex + 1
+        )
+      }}
+      aria-label="Nächstes Bild"
+    >
+      →
+    </button>
   </div>
 )}
     </main>
