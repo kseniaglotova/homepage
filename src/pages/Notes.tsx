@@ -7,17 +7,17 @@ const noteCategories = [
   {
     id: 'rides',
     title: 'Rides',
-    image: '/motorrad-bild.jpg',
+    image: '/notes-icons/motorrad-bild.jpg',
   },
   {
     id: 'food',
     title: 'Food',
-    image: '/pizza1.jpg',
+    image: '/notes-icons/pizza1.jpg',
   },
   {
     id: 'places',
     title: 'Places',
-    image: '/places/russia/moskau.jpg',
+    image: '/notes-icons/russia/moskau.jpg',
   },
   {
     id: 'projects',

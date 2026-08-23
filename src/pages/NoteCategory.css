@@ -38,10 +38,12 @@
 }
 
 .horizontal-image {
-  height: 200px;
-  flex: 0 0 200px;
+  width: 300px;
+  height: 300px;
+  flex: 0 0 300px;
   object-fit: cover;
   border-radius: 14px;
+  cursor: zoom-in;
 }
 
 @keyframes move-horizontal {
@@ -69,4 +71,22 @@
     gap: 12px;
     animation-duration: 18s;
   }
+}
+
+
+.image-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.modal-image {
+  max-width: min(900px, 90vw);
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 16px;
 }

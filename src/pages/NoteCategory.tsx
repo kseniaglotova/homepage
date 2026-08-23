@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './NoteCategory.css'
 
@@ -6,13 +7,14 @@ const imageModules = import.meta.glob(
     {eager: true, query: '?url', import: 'default'}) as Record<string, string>
 
 export function NoteCategory() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const { categoryy } = useParams()
 
   const images = Object.entries(imageModules)
     .filter(([path]) => path.includes(`/notes/${categoryy}/`))
     .map(([, imageUrl]) => imageUrl)
 
-  const repeatedImages = [...images, ...images, ...images, ...images,]
+  const repeatedImages = [...images, ...images, ...images]
   const title = categoryy ? categoryy[0].toUpperCase() + categoryy.slice(1) : 'Notes'
 
   return (
@@ -30,10 +32,22 @@ export function NoteCategory() {
               src={image}
               alt={`${title} Bild ${index + 1}`}
               className="horizontal-image"
+              onClick={() => setSelectedImage(image)}
             />
           ))}
         </div>
       </section>
+
+      
+      {selectedImage && (
+  <div className="image-modal" onClick={() => setSelectedImage(null)}>
+    <img
+      src={selectedImage}
+      alt={`${title} vergrößert`}
+      className="modal-image"
+    />
+  </div>
+)}
     </main>
   )
 }
