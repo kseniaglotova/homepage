@@ -1,25 +1,63 @@
 
+import React, { useState } from 'react';
+import './PersonalPage.css'
+
 export function PersonalPage() {
+
+  const meinungen = [
+  "Wasser >> Süßgetränke. (Hydro-Homies an die Macht, Zucker blockiert nur das Gehirn).",
+  "Motorrad fahren >> Alkohol. Adrenalin schlägt Kater am nächsten Morgen um Längen.",
+  "Mathe >> andere Schulfächer. Zahlen lügen wenigstens nicht (im Gegensatz zu manchen Datensätzen).",
+  "Schräglage auf dem Motorrad ist die mathematische Kurve, welche ich blind beherrsche.",
+  "Warum trinken Menschen Limonade, wenn H2O die logischste Flüssigkeit der Welt ist?",
+  "Stuttgart steht im Stau. Ich stehe in der Kurve. Wir sind nicht gleich.",
+  "Fehler passieren. Mir zwar selten, aber sie passieren. (bisschen gelogen)",
+];
+
+
+  const [aktuelleMeinung, setAktuelleMeinung] = useState("IMHO");
+  const meinungAendern = ()=> {
+      const zufallsIndex = Math.floor(Math.random()*meinungen.length);
+            setAktuelleMeinung(meinungen[zufallsIndex]);
+  };
   return (
-    <div className="personal-page">
+    <main className="personal-page">
+    <header className="hero-section">
       <h1>About me</h1>
-      <p>Hallo, ich bin Ksenia.</p>
-      <p>Dies ist die persöhnliche Seite</p>
-      <p>Ich mag Dinge, die man verstehen kann. Nicht unbedingt sofort - aber irgendwann (wobei.. am besten sofort).</p>
-    <h2>Right now</h2>
-    <ul>
-        <li>Studium: Wirtschaftinformatik - Data Science</li>
-        <li>Außerhalb davon: andere Sachen</li>
-    </ul>
-    <h2>Random facts</h2>
-    <ul>
-        <li>Ich programmiere an der Website, obwohl ich vorher eigentlich keine Ahnung hatte</li>
-        <li>Ich ändere meine Meinung manchmal schneller als meinen Plan</li>
-        <li>Ich kann nicht lesen</li>
-    </ul>
-    <h2>To be continued</h2>
-    <p>Ich weiß absolut nicht, wie diese Seite in der Zukunft aussehen wird</p>
-    <p>Wahrscheinlich anders</p>
-    </div>
+      <p className="subtitle">Hallo, ich bin Ksenia.</p>
+      <p className="tagline">
+        Ich mag Dinge, die man verstehen kann. Nicht unbedingt sofort – aber irgendwann 
+        <span className="strike"> (wobei.. am besten sofort)</span>. Okay, eigentlich am liebsten sofort.
+      </p>
+    </header>
+
+    <section className="info-card">
+      <h2>Status Quo</h2>
+      <ul>
+        <li><strong>Studium:</strong> Wirtschaftsinformatik – Data Science (Daten analysieren, um die Welt zu beherrschen).</li>
+        <li><strong>Außerhalb davon:</strong> Dinge tun, die absolut nichts mit Code oder Daten zu tun haben.</li>
+      </ul>
+    </section>
+
+    <section className="info-card">
+      <h2>Random Facts</h2>
+      <ul>
+        <li>Ich programmiere an dieser Website, obwohl ich vorher absolut keinen Plan hatte. TypeScript wird dabei weitesgehend umgangen.</li>
+        <li className="interactive-fact">
+          <span className="opinion-text">{aktuelleMeinung}</span>
+          <button className="opinion-button" onClick={meinungAendern}>
+            Meinung ändern 🔄
+          </button>
+        </li>
+        <li>Ich kann nicht lesen. (Außer Fehlermeldungen in der Konsole, die ignoriere ich aber gekonnt).</li>
+      </ul>
+    </section>
+
+    <section className="info-card future-section">
+      <h2>To be continued...</h2>
+      <p>Ich weiß absolut nicht, wie diese Seite in der Zukunft aussehen wird.</p>
+      <p className="highlight">Spoiler: Wahrscheinlich komplett anders.</p>
+    </section>
+  </main>
   )
 }

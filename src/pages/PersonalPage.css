@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+.personal-page {
+  --background: #f5f3ee;
+  --surface: #fffdf8;
+  --text: #000;
+  --muted: #716f68;
+  --accent: #e16b4c;
+  --line: #dedbd2;
+  color: var(--text);
+  background: var(--background);
+  font-family: "DM Sans", sans-serif;
+  padding-bottom: 20px;
+}
+.personal-page,
+.personal-page * {
+  box-sizing: border-box;
+}
+.personal-page > * {
+  width: min(1000px, 100%);
+  margin: 0 auto;
+}
+
+.hero-section {
+  padding: 20px 0 20px;
+}
+
+.hero-section::before {
+  content: "PERSONAL PAGE / 2026";
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.hero-section h1 {
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(4rem, 12vw, 8.5rem);
+  letter-spacing: -0.08em;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+}
+
+.tagline {
+  max-width: 650px;
+  margin: 0;
+  color: var(--muted);
+}
+
+.strike {
+  color: var(--accent);
+  text-decoration: line-through;
+}
+
+.info-card {
+  margin-bottom: 24px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 253, 248, 0.82);
+  box-shadow: 0 16px 40px rgba(30, 25, 20, 0.05);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 50px rgba(30, 25, 20, 0.1);
+}
+
+.info-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 24px;
+  font-size: 1.8rem;
+  letter-spacing: -0.04em;
+}
+
+.info-card h2::before {
+  color: var(--accent);
+  content: "→";
+  font-size: 1.4rem;
+}
+
+.info-card ul {
+  padding: 0;
+  list-style: none;
+}
+
+.info-card li {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.info-card li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.info-card strong {
+  color: var(--text);
+}
+
+.interactive-fact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.opinion-text {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.opinion-button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.opinion-button:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.future-section {
+  color: #fff;
+  background: #20211f;
+}
+
+.future-section p {
+  color: #c6c5bd;
+}
+
+.future-section p.highlight {
+  margin-bottom: 0;
+  color: #f3b29f;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .personal-page {
+    padding: 10px 10px;
+  }
+
+
+  .interactive-fact {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
