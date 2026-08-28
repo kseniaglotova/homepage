@@ -1,9 +1,8 @@
 import type { ComponentType } from 'react'
-import { PersonalPage } from './pages/PersonalPage'
-/*import { Test } from './pages/Test'*/
 /*import { Links } from './pages/Links'*/
 import { Notes } from './pages/Notes'
 import { Bike } from './pages/Bike'
+import { Personal } from './pages/Personal'
 
 type MainCategory = {
   label: string
@@ -13,9 +12,9 @@ type MainCategory = {
 
 export const mainCategories: MainCategory[] = [
   {
-    label: 'Persönliches',
+    label: 'Personal',
     path: '/personal',
-    component: PersonalPage,
+    component: Personal,
   },
   /*{
     label: 'Test',

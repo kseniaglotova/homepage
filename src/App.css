@@ -83,3 +83,14 @@ body {
     gap: 14px 20px;
   }
 }
+
+.secret-link {
+  color: #a8a69e;
+  text-decoration: none;
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+.secret-link:hover {
+  opacity: 1;
+}

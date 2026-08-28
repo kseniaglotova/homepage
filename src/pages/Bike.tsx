@@ -160,6 +160,20 @@ const sectionNames = [
 export function Bike() {
   const [activeSection, setActiveSection] =
     useState<(typeof sectionNames)[number]>('the bike')
+    
+  const [bikeIsShaking, setBikeIsShaking] = useState(false)
+
+  function handleBikeClick() {
+  if (bikeIsShaking) {
+    return
+  }
+
+  setBikeIsShaking(true)
+
+  setTimeout(() => {
+    setBikeIsShaking(false)
+  }, 700)
+}
 
   const currentSection = sections[activeSection]
 
@@ -169,10 +183,13 @@ export function Bike() {
         <h1>Suzuki SV 650</h1>
 
         <img
-          src="/suzuki-sv-seite.png"
-          alt="Suzuki SV 650"
-          className="motorcycle-image"
-        />
+        src="/suzuki-sv-seite.png"
+        alt="Suzuki SV 650"
+        className={`motorcycle-image ${
+          bikeIsShaking ? 'bike-clicked' : ''
+        }`}
+        onClick={handleBikeClick}
+      />
       </section>
 
       <nav className="motorcycle-tabs">

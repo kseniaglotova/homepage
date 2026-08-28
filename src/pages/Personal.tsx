@@ -1,8 +1,8 @@
 
 import { useState } from 'react'
-import './PersonalPage.css'
+import './Personal.css'
 
-export function PersonalPage() {
+export function Personal() {
 
   const meinungen = [
   "Wasser >> Süßgetränke. (Hydro-Homies an die Macht, Zucker blockiert nur das Gehirn).",

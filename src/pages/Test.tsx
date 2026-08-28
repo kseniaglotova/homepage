@@ -1,90 +1,103 @@
+import { useState } from 'react'
 import './Test.css'
 
-export function Test() {
-const images: string[] = [
-  "/bike/moped-test.jpg",
-  "/bike/motorrad-bild.jpg",
-  "/bike/motorrad-bild2.jpg",
-  "/homepage-background.jpg",  
-];
+const SECRET_PASSWORD = 'grr'
 
-const repeatedImages: string[] = [...images, ...images];
+export function SecretTestPage() {
+  const [password, setPassword] = useState('')
+  const [isUnlocked, setIsUnlocked] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
-const images2: string[] = [
-  "/food/bowl.jpg",
-  "/food/pizza1.jpg"
-];
-
-const repeatedImages2: string[] = [...images2, ...images2];
-
-
-
-const images4: string[] = [
-  "/places/france/cassis-sea.jpg",
-  "/places/france/france-cassis.jpg",
-  "/places/russia/moskau-city.jpg",
-  "/places/russia/moskau.jpg",
-  "/places/russia/sankt-petersburg.jpg",
-];
-
-const repeatedImages4: string[] = [...images4, ...images4];
-
-
+  function checkPassword(){
+    if (password === SECRET_PASSWORD){
+      setIsUnlocked(true)
+      setHasError(false)
+    } else{
+      setHasError(true)
+    }
+  }
+  if (isUnlocked){
+    return <Test />
+  }
 
   return (
-    <div className="test-layout">
-      <div className="image-rail" aria-label="Scrolling image gallery">
-        <div className="image-track">
-          {repeatedImages.map((image, index) =>
-            (
-              <img
-                key={index} 
-                src={image} 
-                alt={"Index: "+index} 
-               />
-            )
-          )}
-        </div>
+    <main className="secret-gate">
+      <div className="secret-box">
+        <div className="secret-lock">🔒</div>
+        <h1>Geheimer Bereich</h1>
+        <p>Nur für Menschen mit dem richtigen Passwort.</p>
+
+        <form onSubmit={(event) =>{
+          event.preventDefault()
+          checkPassword()
+        }}>
+          <input 
+          type="password" 
+          value={password} 
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder="Passwort"
+          autoFocus/>
+
+          <button type="submit">Öffnen</button>
+        </form>
+
+        {hasError && (<p className="secret-error">Falsches Passwort.</p>)}
       </div>
+    </main>
+  )
+}
 
+export function Test() {
+  const [keks, setKeks] = useState(0)
+  const [message, setMessage] = useState('Warte auf Befehle...')
+  const [alarmActive, setAlarmActive] = useState(false)
 
-      <div className="test-text">
-        <h2>Test Page</h2>
+  function handleCookieClick() {
+    const newAmount = keks + 1
+    setKeks(newAmount)
+
+    if (newAmount === 1) {
+      setMessage('Du hast einen Keks bekommen! 🍪')
+    } else if (newAmount === 2) {
+      setMessage('Noch ein Keks. Das eskaliert schnell. 🍪🍪')
+    } else {
+      setMessage(`Keks-Level ${newAmount}: Krümelmonster-Modus aktiviert.`)
+    }
+  }
+
+  function handleAlarmClick() {
+    setAlarmActive(true)
+    setMessage('ALARM! Ich habe gesagt: nicht drücken!')
+
+    setTimeout(() => {
+      setAlarmActive(false)
+      setMessage('Der Alarm wurde wieder beruhigt.')
+    }, 1200)
+  }
+
+  return (
+    <main className={`secret-page ${alarmActive ? 'alarm-active' : ''}`}>
+      <section className="secret-content">
+        <p className="secret-label">CLASSIFIED / TEST 001</p>
+
+        <h1>Streng geheimer Bereich</h1>
+
         <p>
-          Hier sind Bilder, welche endlos durchlaufen.
+          Glückwunsch. Du hast das Passwort gefunden.
         </p>
-      </div>
 
-      <div className="image-rail" aria-label="Scrolling image gallery">
-        <div className="image-track">
-          {repeatedImages2.map((image, index) =>
-            (
-              <img
-                key={index} 
-                src={image} 
-                alt={"Index: "+index} 
-               />
-            )
-          )}
+        <div className="secret-buttons">
+          <button type="button" onClick={handleCookieClick}>
+            Keks abholen 🍪
+          </button>
+
+          <button type="button" onClick={handleAlarmClick}>
+            Nicht drücken
+          </button>
         </div>
-      </div>
 
-
-      <div className="image-rail" aria-label="Scrolling image gallery">
-        <div className="image-track">
-          {repeatedImages4.map((image, index) =>
-            (
-              <img
-                key={index} 
-                src={image} 
-                alt={"Index: "+index} 
-               />
-            )
-          )}
-        </div>
-      </div>
-
-    </div>
-    
+        <p className="secret-message">{message}</p>
+      </section>
+    </main>
   )
 }

@@ -1,13 +1,29 @@
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, NavLink, Link, useLocation, } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { mainCategories } from './mainCategories'
 import './App.css'
+import { SecretTestPage } from './pages/Test'
 
 import { NoteCategory } from './pages/NoteCategory'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({
+  top: 0,
+  behavior: 'smooth',
+})
+  }, [pathname])
+
+  return null
+}
 
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <nav className="top-nav">
         <NavLink to="/" className="nav-link">
           Home
@@ -39,6 +55,7 @@ function App() {
           )
         })}
         <Route path="/notes/:categoryy" element={<NoteCategory />} />
+        <Route path="/test" element={<SecretTestPage />} />
       </Routes>
 
       <footer className="footer">
@@ -61,6 +78,10 @@ function App() {
             </a>
           </nav>
         </div>
+
+        <Link to="/test" className="secret-link" aria-label="Geheimer Bereich">
+        🔒
+        </Link>
     </footer>
     </BrowserRouter>
 
