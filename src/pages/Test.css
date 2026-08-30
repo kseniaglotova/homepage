@@ -1,70 +1,106 @@
 .secret-gate {
-  min-height: calc(100vh - 150px);
+  min-height: calc(100vh - 140px);
   display: grid;
   place-items: center;
   padding: 40px 20px;
-  background: #f1f0ec;
+  background: #f6f2ec;
 }
 
 .secret-box {
-  width: min(420px, 100%);
-  padding: 42px 32px;
+  width: min(440px, 100%);
+  padding: 36px 28px;
   border-radius: 18px;
-  background: #fffdf8;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 18px 40px rgba(22, 20, 18, 0.08);
   text-align: center;
-  box-shadow: 0 18px 45px rgba(30, 25, 20, 0.12);
 }
 
 .secret-lock {
-  margin-bottom: 18px;
-  font-size: 3rem;
+  margin-bottom: 14px;
+  font-size: 2.5rem;
+  opacity: 0.7;
 }
 
 .secret-box h1 {
-  margin: 0 0 12px;
-  font-size: 2rem;
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  letter-spacing: -0.05em;
 }
 
 .secret-box p {
-  margin: 0 0 24px;
-  color: #716f68;
+  margin: 0 0 22px;
+  color: #665d57;
 }
 
-.secret-box form {
+.secret-input-row {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .secret-box input {
   flex: 1;
+  min-width: 0;
   padding: 12px 14px;
-  border: 1px solid #c8c4ba;
-  border-radius: 8px;
+  border: 1px solid #d1c8bf;
+  border-radius: 10px;
+  background: #fff;
+  color: #1d1b1a;
+  font: inherit;
+}
+
+.secret-box input::placeholder {
+  color: #8a8178;
 }
 
 .secret-box input:focus {
-  outline: 2px solid #e16b4c;
+  outline: 2px solid rgba(140, 103, 79, 0.25);
   outline-offset: 2px;
+  border-color: #8a6f5c;
 }
 
 .secret-box button {
   padding: 12px 16px;
   border: 0;
-  border-radius: 8px;
-  background: #000;
+  border-radius: 10px;
+  background: #1d1b1a;
   color: #fff;
+  font: inherit;
   font-weight: 700;
   cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.12s ease;
 }
 
 .secret-box button:hover {
-  background: #e16b4c;
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.password-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.password-toggle {
+  background: transparent !important;
+  padding: 0 !important;
+  color: #766b63 !important;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.password-toggle:hover {
+  opacity: 1;
 }
 
 .secret-error {
-  margin-top: 18px !important;
-  margin-bottom: 0 !important;
-  color: #c0392b !important;
+  margin-top: 16px;
+  color: #a33a2f;
   font-weight: 700;
 }
 

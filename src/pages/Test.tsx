@@ -8,6 +8,7 @@ export function SecretTestPage() {
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [hasError, setHasError] = useState(false)
 
+  const [showPassword, setShowPassword] = useState(false)
   function checkPassword(){
     if (password === SECRET_PASSWORD){
       setIsUnlocked(true)
@@ -20,31 +21,48 @@ export function SecretTestPage() {
     return <Test />
   }
 
-  return (
-    <main className="secret-gate">
-      <div className="secret-box">
-        <div className="secret-lock">🔒</div>
-        <h1>Geheimer Bereich</h1>
-        <p>Nur für Menschen mit dem richtigen Passwort.</p>
+return (
+  <main className="secret-gate">
+    <div className="secret-box">
+      <div className="secret-lock">🔒</div>
+      <h1>Secret Space</h1>
 
-        <form onSubmit={(event) =>{
+      <p>Nur für Personen mit dem richtigen Passwort.</p>
+
+      <form
+        onSubmit={(event) => {
           event.preventDefault()
           checkPassword()
-        }}>
-          <input 
-          type="password" 
-          value={password} 
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder="Passwort"
-          autoFocus/>
+        }}
+      >
+        <div className="secret-input-row">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder={showPassword ? `Passwort: ${SECRET_PASSWORD}` : 'Passwort'}
+            autoFocus
+          />
 
           <button type="submit">Öffnen</button>
-        </form>
+        </div>
 
-        {hasError && (<p className="secret-error">Falsches Passwort.</p>)}
-      </div>
-    </main>
-  )
+        <div className="password-row">
+          <button
+            type="button"
+            className="password-toggle"
+            onClick={() => setShowPassword((current) => !current)}
+          >
+            {showPassword ? 'Verstecken' : 'Passwort anzeigen'}
+          </button>
+        </div>
+      </form>
+
+
+      {hasError && <p className="secret-error">Falsches Passwort.</p>}
+    </div>
+  </main>
+)
 }
 
 export function Test() {

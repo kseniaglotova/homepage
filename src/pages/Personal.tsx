@@ -6,11 +6,7 @@ export function Personal() {
 
   const meinungen = [
   "Wasser >> Süßgetränke. (Hydro-Homies an die Macht, Zucker blockiert nur das Gehirn).",
-  "Motorrad fahren >> Alkohol. Adrenalin schlägt Kater am nächsten Morgen um Längen.",
-  "Mathe >> andere Schulfächer. Zahlen lügen wenigstens nicht (im Gegensatz zu manchen Datensätzen).",
-  "Schräglage auf dem Motorrad ist die mathematische Kurve, welche ich blind beherrsche.",
-  "Warum trinken Menschen Limonade, wenn H2O die logischste Flüssigkeit der Welt ist?",
-  "Stuttgart steht im Stau. Ich stehe in der Kurve. Wir sind nicht gleich.",
+  "Mathe >> andere Schulfächer. Zahlen lügen wenigstens nicht.",
   "Fehler passieren. Mir zwar selten, aber sie passieren. (bisschen gelogen)",
 ];
 

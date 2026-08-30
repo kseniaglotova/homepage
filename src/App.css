@@ -85,12 +85,16 @@ body {
 }
 
 .secret-link {
-  color: #a8a69e;
-  text-decoration: none;
-  opacity: 0.35;
-  transition: opacity 0.2s ease;
+  opacity: 0.28;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 10rem;
 }
 
 .secret-link:hover {
   opacity: 1;
+  transform: scale(1.08);
 }

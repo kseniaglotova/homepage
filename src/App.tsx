@@ -64,6 +64,10 @@ function App() {
             © 2026 Ksenia Glotova
           </p>
 
+            <Link to="/test" className="secret-link" aria-label="Geheimer Bereich">
+            🔒
+            </Link>
+
           <nav className="footer-links">
             <a href="https://www.instagram.com/kseniaglotovaa/">
               Instagram
@@ -79,9 +83,7 @@ function App() {
           </nav>
         </div>
 
-        <Link to="/test" className="secret-link" aria-label="Geheimer Bereich">
-        🔒
-        </Link>
+
     </footer>
     </BrowserRouter>
 
