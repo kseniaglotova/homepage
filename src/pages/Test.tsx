@@ -40,7 +40,7 @@ return (
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            placeholder={showPassword ? `Passwort: ${SECRET_PASSWORD}` : 'Passwort'}
+            placeholder={showPassword ? `richtiges Passwort: ${SECRET_PASSWORD}` : 'Passwort'}
             autoFocus
           />
 
@@ -53,7 +53,7 @@ return (
             className="password-toggle"
             onClick={() => setShowPassword((current) => !current)}
           >
-            {showPassword ? 'Verstecken' : 'Passwort anzeigen'}
+            {showPassword ? 'richtiges Passwort verstecken' : 'richtiges Passwort anzeigen'}
           </button>
         </div>
       </form>

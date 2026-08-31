@@ -86,21 +86,14 @@
 .password-toggle {
   background: transparent !important;
   padding: 0 !important;
-  color: #766b63 !important;
+  color: #8b0000 !important;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  text-decoration: underline;
-  opacity: 0.8;
-}
-
-.password-toggle:hover {
-  opacity: 1;
 }
 
 .secret-error {
-  margin-top: 16px;
-  color: #a33a2f;
+  color: #8b0000 !important;
   font-weight: 700;
 }
 
