@@ -23,8 +23,8 @@ export function Personal() {
       <p className="subtitle">Hallo, ich bin Ksenia.</p>
       <p className="tagline">
         Ich mag Dinge, die man verstehen kann. Nicht unbedingt sofort – aber irgendwann 
-        <span className="strike"> (wobei.. am besten sofort)</span>. Okay, eigentlich am liebsten sofort.
-      </p>
+        <span className="strike"> (wobei.. am besten sofort)</span>.
+        </p>
     </header>
 
     <section className="info-card">
