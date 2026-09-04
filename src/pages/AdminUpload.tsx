@@ -55,7 +55,7 @@ export default function AdminUpload() {
             <option value="rides">Rides 🏍️</option>
           </select>
         </label>
-        <input type="file" accept="image/*" style={{ fontSize: '16px' }} onChange={(e) => setFile(e.target.files?. || null)} />
+        <input type="file" accept="image/*" style={{ fontSize: '16px' }} onChange={(e) => setFile(e.target.files?.[0] || null)} />
         <button type="submit" style={{ padding: '12px', background: '#000', color: '#fff', border: 'none', borderRadius: '5px', fontSize: '16px' }}>
           Bild hochladen
         </button>
