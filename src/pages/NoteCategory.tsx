@@ -2,24 +2,25 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import './NoteCategory.css'
 
-// 1. Deine alten, lokalen Bilder vom PC weiterhin einlesen
+// 1. Lokale Bilder vom PC einlesen
 const imageModules = import.meta.glob(
     '../assets/notes/*/*.{jpg,jpeg,png,webp}',
     {eager: true, query: '?url', import: 'default'}) as Record<string, string>
 
 export function NoteCategory() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const [isBlobSelected, setIsBlobSelected] = useState<boolean>(false)
   const { categoryy } = useParams()
   
-  // Neuer State für die Bilder, die vom Handy hochgeladen wurden
+  // State für die Handy-Bilder von Vercel
   const [blobImages, setBlobImages] = useState<string[]>([])
 
-  // 2. Lokale Bilder filtern
+  // 2. Lokale Bilder filtern (Wie im Originalcode)
   const localImages = Object.entries(imageModules)
     .filter(([path]) => path.includes(`/notes/${categoryy}/`))
     .map(([, imageUrl]) => imageUrl)
 
-  // 3. Neue Handy-Bilder live von Vercel Blob dazuladen
+  // 3. Handy-Bilder live von Vercel Blob laden
   useEffect(() => {
     async function fetchHandyImages() {
       if (!categoryy) return
@@ -27,22 +28,24 @@ export function NoteCategory() {
         const response = await fetch(`/api/list?category=${categoryy}`)
         if (response.ok) {
           const data = await response.json()
-          setBlobImages(data) // Speichert die URLs der Handy-Bilder
+          setBlobImages(data)
         }
       } catch (error) {
-        console.error("Fehler beim Laden der Handy-Bilder:", error);
+        console.error("Fehler beim Laden der Handy-Bilder:", error)
       }
     }
 
     fetchHandyImages()
   }, [categoryy])
 
-  // 4. Kombiniere PC-Bilder und Handy-Bilder in einer einzigen Liste
-  const allImages = [...localImages, ...blobImages]
-
-  // Deine bestehende Logik für die Endlos-Schleife (wiederholte Bilder)
-  const repeatedImages = [...allImages, ...allImages, ...allImages]
+  // Endlos-Schleife NUR für die lokalen PC-Bilder (Exakt wie vorher)
+  const repeatedLocalImages = [...localImages, ...localImages, ...localImages]
+  
+  // Titel-Formatierung (Erster Buchstabe groß)
   const title = categoryy ? categoryy[0].toUpperCase() + categoryy.slice(1) : 'Notes'
+
+  // Bestimmt, aus welcher Liste das vergrößerte Bild kommt
+  const currentActiveImages = isBlobSelected ? blobImages : localImages
 
   return (
     <main className="note-category-page">
@@ -51,24 +54,55 @@ export function NoteCategory() {
         <h1>{title}</h1>
       </header>
 
+      {/* OBEN: Die originale, horizontale PC-Bilder-Galerie */}
       <section className="horizontal-gallery">
         <div className="horizontal-track">
-          {repeatedImages.map((image, index) => (
+          {repeatedLocalImages.map((image, index) => (
             <img
-              key={`${image}-${index}`}
+              key={`local-${image}-${index}`}
               src={image}
               alt={`${title} Bild ${index + 1}`}
               className="horizontal-image"
-              // Korrigiert auf die Gesamtlänge aller Bilder
-              onClick={() => setSelectedIndex(index % allImages.length)}
+              onClick={() => {
+                setIsBlobSelected(false) // Sagt dem Modal: PC-Bilder nutzen
+                setSelectedIndex(index % localImages.length)
+              }}
             />
           ))}
         </div>
       </section>
 
-      {/* Dein funktionierendes Modal für die Großansicht */}
-      {selectedIndex !== null && allImages.length > 0 && (
-        <div className="image-modal" onClick={() => setSelectedIndex(null)}>
+      {/* UNTEN: Neuer Bereich für deine Handy-Uploads (Wird nur angezeigt, wenn Bilder da sind) */}
+      {blobImages.length > 0 && (
+        <section className="blob-uploads-section" style={{ padding: '40px 0', borderTop: '1px solid #eee', marginTop: '40px' }}>
+          <p className="note-category-kicker" style={{ marginBottom: '20px' }}>MOBILE UPLOADS</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+            {blobImages.map((image, index) => (
+              <img
+                key={`blob-${image}-${index}`}
+                src={image}
+                alt={`${title} Upload ${index + 1}`}
+                style={{ 
+                  width: 'calc(33.333% - 11px)', 
+                  minWidth: '250px', 
+                  height: '250px', 
+                  objectFit: 'cover', 
+                  borderRadius: '6px', 
+                  cursor: 'pointer' 
+                }}
+                onClick={() => {
+                  setIsBlobSelected(true) // Sagt dem Modal: Handy-Bilder nutzen
+                  setSelectedIndex(index)
+                }}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Das originale Modal (Passt sich automatisch an, ob PC oder Handy-Bild angeklickt wurde) */}
+      {selectedIndex !== null && currentActiveImages.length > 0 && (
+        <div className="image-modal" onClick={() => { setSelectedIndex(null) }}>
           <button
             type="button"
             className="modal-arrow modal-arrow-left"
@@ -76,7 +110,7 @@ export function NoteCategory() {
               event.stopPropagation()
               setSelectedIndex(
                 selectedIndex === 0
-                  ? allImages.length - 1
+                  ? currentActiveImages.length - 1
                   : selectedIndex - 1
               )
             }}
@@ -86,7 +120,7 @@ export function NoteCategory() {
           </button>
           
           <img
-            src={allImages[selectedIndex]}
+            src={currentActiveImages[selectedIndex]}
             alt={`${title} vergrößert`}
             className="modal-image"
           />
@@ -97,7 +131,7 @@ export function NoteCategory() {
             onClick={(event) => {
               event.stopPropagation()
               setSelectedIndex(
-                selectedIndex === allImages.length - 1
+                selectedIndex === currentActiveImages.length - 1
                   ? 0
                   : selectedIndex + 1
               )
