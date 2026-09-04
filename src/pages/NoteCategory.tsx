@@ -72,34 +72,6 @@ export function NoteCategory() {
         </div>
       </section>
 
-      {/* UNTEN: Neuer Bereich für deine Handy-Uploads (Wird nur angezeigt, wenn Bilder da sind) */}
-      {blobImages.length > 0 && (
-        <section className="blob-uploads-section" style={{ padding: '40px 0', borderTop: '1px solid #eee', marginTop: '40px' }}>
-          <p className="note-category-kicker" style={{ marginBottom: '20px' }}>MOBILE UPLOADS</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
-            {blobImages.map((image, index) => (
-              <img
-                key={`blob-${image}-${index}`}
-                src={image}
-                alt={`${title} Upload ${index + 1}`}
-                style={{ 
-                  width: 'calc(33.333% - 11px)', 
-                  minWidth: '250px', 
-                  height: '250px', 
-                  objectFit: 'cover', 
-                  borderRadius: '6px', 
-                  cursor: 'pointer' 
-                }}
-                onClick={() => {
-                  setIsBlobSelected(true) // Sagt dem Modal: Handy-Bilder nutzen
-                  setSelectedIndex(index)
-                }}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-
       {blobImages.length > 0 && (
         <section className="blob-uploads-section" style={{ padding: '40px 0', borderTop: '1px solid #eee', marginTop: '40px' }}>
           <p className="note-category-kicker" style={{ marginBottom: '20px' }}>MOBILE UPLOADS</p>
