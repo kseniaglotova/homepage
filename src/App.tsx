@@ -7,6 +7,9 @@ import { SecretTestPage } from './pages/Test'
 
 import { NoteCategory } from './pages/NoteCategory'
 
+import AdminUpload from './pages/AdminUpload';
+
+
 function ScrollToTop() {
   const { pathname } = useLocation()
 
@@ -56,6 +59,8 @@ function App() {
         })}
         <Route path="/notes/:categoryy" element={<NoteCategory />} />
         <Route path="/test" element={<SecretTestPage />} />
+        <Route path="/admin-upload" element={<AdminUpload />} />
+
       </Routes>
 
       <footer className="footer">
