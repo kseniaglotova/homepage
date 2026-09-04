@@ -100,7 +100,47 @@ export function NoteCategory() {
         </section>
       )}
 
-      {/* Das originale Modal (Passt sich automatisch an, ob PC oder Handy-Bild angeklickt wurde) */}
+      {blobImages.length > 0 && (
+        <section className="blob-uploads-section" style={{ padding: '40px 0', borderTop: '1px solid #eee', marginTop: '40px' }}>
+          <p className="note-category-kicker" style={{ marginBottom: '20px' }}>MOBILE UPLOADS</p>
+          
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', 
+            gap: '16px' 
+          }}>
+            {blobImages.map((image, index) => (
+              <div 
+                key={`blob-${image}-${index}`}
+                style={{ 
+                  width: '100%',
+                  aspectRatio: '1 / 1', // Zwingt das Element, ein perfektes Quadrat zu sein (Egal ob PC oder Handy)
+                  overflow: 'hidden',
+                  borderRadius: '6px',
+                  backgroundColor: '#f9f9f9'
+                }}
+              >
+                <img
+                  src={image}
+                  alt={`${title} Upload ${index + 1}`}
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover', // Füllt das Quadrat jetzt sauber aus
+                    cursor: 'pointer' 
+                  }}
+                  onClick={() => {
+                    setIsBlobSelected(true)
+                    setSelectedIndex(index)
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Das originale Modal */}
       {selectedIndex !== null && currentActiveImages.length > 0 && (
         <div className="image-modal" onClick={() => { setSelectedIndex(null) }}>
           <button
