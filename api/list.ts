@@ -15,7 +15,12 @@ export default async function handler(request: VercelRequest, response: VercelRe
     });
 
     // Gibt die URLs der Bilder an deine Website zurück
-    return response.status(200).json(blobs.map(blob => blob.url));
+    // Wir geben jetzt eine Liste von Objekten zurück, die URL und Datum enthalten
+    return response.status(200).json(blobs.map(blob => ({
+      url: blob.url,
+      uploadedAt: blob.uploadedAt
+    })));
+
   } catch (error) {
     return response.status(500).json({ error: (error as Error).message });
   }

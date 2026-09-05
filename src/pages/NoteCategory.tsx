@@ -12,10 +12,10 @@ export function NoteCategory() {
   const [isBlobSelected, setIsBlobSelected] = useState<boolean>(false)
   const { categoryy } = useParams()
   
-  // State für die Handy-Bilder von Vercel
-  const [blobImages, setBlobImages] = useState<string[]>([])
+  // State für die Handy-Bilder von Vercel (inklusive URL und Upload-Datum)
+  const [blobImages, setBlobImages] = useState<{ url: string; uploadedAt: string }[]>([]);
 
-  // 2. Lokale Bilder filtern (Wie im Originalcode)
+  // 2. Lokale Bilder filtern
   const localImages = Object.entries(imageModules)
     .filter(([path]) => path.includes(`/notes/${categoryy}/`))
     .map(([, imageUrl]) => imageUrl)
@@ -44,8 +44,14 @@ export function NoteCategory() {
   // Titel-Formatierung (Erster Buchstabe groß)
   const title = categoryy ? categoryy[0].toUpperCase() + categoryy.slice(1) : 'Notes'
 
+  // NEU: Wir sortieren die Handy-Bilder hier direkt nach Datum (Neueste zuerst).
+  // Dadurch stimmen Galerie-Ansicht und die Pfeiltasten im Modal perfekt überein!
+  const sortedBlobImages = [...blobImages].sort(
+    (a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
+  )
+
   // Bestimmt, aus welcher Liste das vergrößerte Bild kommt
-  const currentActiveImages = isBlobSelected ? blobImages : localImages
+  const currentActiveImages = isBlobSelected ? sortedBlobImages : localImages
 
   return (
     <main className="note-category-page">
@@ -72,7 +78,8 @@ export function NoteCategory() {
         </div>
       </section>
 
-      {blobImages.length > 0 && (
+      {/* UNTEN: Die Handy-Bilder Galerie (Sortiert nach neuestem Upload) */}
+      {sortedBlobImages.length > 0 && (
         <section className="blob-uploads-section" style={{ padding: '40px 0', borderTop: '1px solid #eee', marginTop: '40px' }}>
           <p className="note-category-kicker" style={{ marginBottom: '20px' }}>MOBILE UPLOADS</p>
           
@@ -81,24 +88,24 @@ export function NoteCategory() {
             gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', 
             gap: '16px' 
           }}>
-            {blobImages.map((image, index) => (
+            {sortedBlobImages.map((imageObj, index) => (
               <div 
-                key={`blob-${image}-${index}`}
+                key={`blob-${imageObj.url}-${index}`}
                 style={{ 
                   width: '100%',
-                  aspectRatio: '1 / 1', // Zwingt das Element, ein perfektes Quadrat zu sein (Egal ob PC oder Handy)
+                  aspectRatio: '1 / 1', 
                   overflow: 'hidden',
                   borderRadius: '6px',
                   backgroundColor: '#f9f9f9'
                 }}
               >
                 <img
-                  src={image}
+                  src={imageObj.url}
                   alt={`${title} Upload ${index + 1}`}
                   style={{ 
                     width: '100%', 
                     height: '100%', 
-                    objectFit: 'cover', // Füllt das Quadrat jetzt sauber aus
+                    objectFit: 'cover', 
                     cursor: 'pointer' 
                   }}
                   onClick={() => {
@@ -112,7 +119,7 @@ export function NoteCategory() {
         </section>
       )}
 
-      {/* Das originale Modal */}
+      {/* Das originale Modal (Großansicht) */}
       {selectedIndex !== null && currentActiveImages.length > 0 && (
         <div className="image-modal" onClick={() => { setSelectedIndex(null) }}>
           <button
@@ -132,7 +139,11 @@ export function NoteCategory() {
           </button>
           
           <img
-            src={currentActiveImages[selectedIndex]}
+            src={
+              isBlobSelected 
+                ? (currentActiveImages[selectedIndex] as { url: string }).url 
+                : (currentActiveImages[selectedIndex] as string)
+            }
             alt={`${title} vergrößert`}
             className="modal-image"
           />
