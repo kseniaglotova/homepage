@@ -91,15 +91,11 @@ export function NoteCategory() {
 
       {/* UNTEN: Die Handy-Bilder Galerie */}
       {sortedBlobImages.length > 0 && (
-        <section className="blob-uploads-section" style={{ padding: '40px 0', borderTop: '1px solid #eee', marginTop: '40px' }}>
-          <p className="note-category-kicker" style={{ marginBottom: '20px' }}>MOBILE UPLOADS</p>
+        <section className="blob-uploads-section">
+          <p className="note-category-kicker">MOBILE UPLOADS</p>
           
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', 
-            gap: '16px' 
-          }}>
-            {sortedBlobImages.map((imageObj, index) => (
+          <div className="blob-grid">
+                 {sortedBlobImages.map((imageObj, index) => (
               <div 
                 key={`blob-${imageObj?.url || index}-${index}`}
                 style={{ 

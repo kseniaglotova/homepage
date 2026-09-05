@@ -8,7 +8,7 @@
 
 .note-category-header {
   width: min(1180px, calc(100% - 64px));
-  margin: 0 auto 36px;
+  margin: 0 auto 30px;
 }
 
 .note-category-kicker {
@@ -116,4 +116,26 @@
 }
 
 .blob-uploads-section  { 
-  padding: '40px 0'; border-top: '1px solid #eee'; margin-top: '40px' }
+  width: min(1180px, calc(100% - 64px));
+  margin: 40px auto 0; 
+  padding: 40px 0;}
+  @media (max-width: 768px) {
+
+  .blob-uploads-section {
+    width: calc(100% - 36px);
+    margin-top: 30px;
+  }
+}
+
+.blob-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 550px) {
+  .blob-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px; 
+  }
+}
