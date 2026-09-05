@@ -7,6 +7,8 @@ export default function AdminUpload() {
   const [status, setStatus] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
+  const [customName, setCustomName] = useState('');
+
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!file || !password) return setStatus('Bitte Passwort und Datei eingeben.');
@@ -14,15 +16,25 @@ export default function AdminUpload() {
     setStatus('Bild wird hochgeladen...');
 
     try {
-      const url = `/api/upload?filename=${encodeURIComponent(file.name)}&contentType=${file.type}&category=${category}`;
-      
+      // 1. Wir finden heraus, ob das Bild .jpg, .png oder sonst wie endet
+      const fileExtension = file.name.substring(file.name.lastIndexOf('.'));
+
+      // 2. Wir prüfen: Hast du einen Wunschnamen eingetippt? 
+      // Wenn ja, nutzen wir ihn + Endung. Wenn nein, den Originalnamen.
+      const finalFilename = customName.trim() !== '' 
+        ? `${customName.trim()}${fileExtension}`
+        : file.name;
+
+      // 3. Jetzt bauen wir die URL mit dem fertigen Namen zusammen
+      const url = `/api/upload?filename=${encodeURIComponent(finalFilename)}&contentType=${file.type}&category=${category}`;
+
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'x-admin-password': password,
         },
         body: file,
-      });
+    });
 
       if (!response.ok) {
         throw new Error('Upload fehlgeschlagen. Passwort falsch?');
@@ -31,6 +43,7 @@ export default function AdminUpload() {
       const blob = await response.json();
       setStatus('Erfolgreich hochgeladen! 🎉');
       setImageUrl(blob.url); 
+      setCustomName('');
     } catch (error) {
       setStatus((error as Error).message);
     }
@@ -55,6 +68,15 @@ export default function AdminUpload() {
             <option value="rides">Rides 🏍️</option>
           </select>
         </label>
+                {/* Hier war die Kategorie-Auswahl... danach kommt das neue Feld: */}
+        <input 
+          type="text" 
+          placeholder="Dateiname" 
+          style={{ padding: '10px', fontSize: '16px' }}
+          value={customName} 
+          onChange={(e) => setCustomName(e.target.value)} 
+        />
+
         <input type="file" accept="image/*" style={{ fontSize: '16px' }} onChange={(e) => setFile(e.target.files?.[0] || null)} />
         <button type="submit" style={{ padding: '12px', background: '#000', color: '#fff', border: 'none', borderRadius: '5px', fontSize: '16px' }}>
           Bild hochladen

@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react'
-/*import { Links } from './pages/Links'*/
+import { Dashboard } from './pages/Dashboard'
 import { Notes } from './pages/Notes'
 import { Bike } from './pages/Bike'
 import { Personal } from './pages/Personal'
@@ -21,11 +21,11 @@ export const mainCategories: MainCategory[] = [
     path: '/test',
     component: Test,
   },*/
-  /*{
-    label: 'Links',
-    path: '/links',
-    component: Links,
-  },*/
+  {
+    label: 'Dashboard',
+    path: '/dashboard',
+    component: Dashboard,
+  },
   {
     label: 'Notes',
     path: '/notes',
