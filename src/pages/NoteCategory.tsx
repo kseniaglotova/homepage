@@ -12,8 +12,8 @@ export function NoteCategory() {
   const [isBlobSelected, setIsBlobSelected] = useState<boolean>(false)
   const { categoryy } = useParams()
   
-  // State für die Handy-Bilder von Vercel (inklusive URL und Upload-Datum)
-  const [blobImages, setBlobImages] = useState<{ url: string; uploadedAt: string }[]>([]);
+  // State für die Handy-Bilder von Vercel
+  const [blobImages, setBlobImages] = useState<any[]>([]);
 
   // 2. Lokale Bilder filtern
   const localImages = Object.entries(imageModules)
@@ -28,7 +28,17 @@ export function NoteCategory() {
         const response = await fetch(`/api/list?category=${categoryy}`)
         if (response.ok) {
           const data = await response.json()
-          setBlobImages(data)
+          
+          // SCHUTZFUNKTION: Wir wandeln alte Text-URLs automatisch in neue Objekte um,
+          // falls die list.ts auf dem Server noch nicht aktualisiert wurde!
+          const formattedData = data.map((item: any) => {
+            if (typeof item === 'string') {
+              return { url: item, uploadedAt: new Date().toISOString() }
+            }
+            return item
+          })
+          
+          setBlobImages(formattedData)
         }
       } catch (error) {
         console.error("Fehler beim Laden der Handy-Bilder:", error)
@@ -44,11 +54,12 @@ export function NoteCategory() {
   // Titel-Formatierung (Erster Buchstabe groß)
   const title = categoryy ? categoryy[0].toUpperCase() + categoryy.slice(1) : 'Notes'
 
-  // NEU: Wir sortieren die Handy-Bilder hier direkt nach Datum (Neueste zuerst).
-  // Dadurch stimmen Galerie-Ansicht und die Pfeiltasten im Modal perfekt überein!
-  const sortedBlobImages = [...blobImages].sort(
-    (a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
-  )
+  // Wir sortieren die Handy-Bilder nach Datum (Neueste zuerst).
+  const sortedBlobImages = [...blobImages].sort((a, b) => {
+    const timeB = b?.uploadedAt ? new Date(b.uploadedAt).getTime() : 0
+    const timeA = a?.uploadedAt ? new Date(a.uploadedAt).getTime() : 0
+    return timeB - timeA
+  })
 
   // Bestimmt, aus welcher Liste das vergrößerte Bild kommt
   const currentActiveImages = isBlobSelected ? sortedBlobImages : localImages
@@ -78,7 +89,7 @@ export function NoteCategory() {
         </div>
       </section>
 
-      {/* UNTEN: Die Handy-Bilder Galerie (Sortiert nach neuestem Upload) */}
+      {/* UNTEN: Die Handy-Bilder Galerie */}
       {sortedBlobImages.length > 0 && (
         <section className="blob-uploads-section" style={{ padding: '40px 0', borderTop: '1px solid #eee', marginTop: '40px' }}>
           <p className="note-category-kicker" style={{ marginBottom: '20px' }}>MOBILE UPLOADS</p>
@@ -90,7 +101,7 @@ export function NoteCategory() {
           }}>
             {sortedBlobImages.map((imageObj, index) => (
               <div 
-                key={`blob-${imageObj.url}-${index}`}
+                key={`blob-${imageObj?.url || index}-${index}`}
                 style={{ 
                   width: '100%',
                   aspectRatio: '1 / 1', 
@@ -100,7 +111,7 @@ export function NoteCategory() {
                 }}
               >
                 <img
-                  src={imageObj.url}
+                  src={imageObj?.url || ''}
                   alt={`${title} Upload ${index + 1}`}
                   style={{ 
                     width: '100%', 
@@ -141,7 +152,7 @@ export function NoteCategory() {
           <img
             src={
               isBlobSelected 
-                ? (currentActiveImages[selectedIndex] as { url: string }).url 
+                ? (currentActiveImages[selectedIndex]?.url || '') 
                 : (currentActiveImages[selectedIndex] as string)
             }
             alt={`${title} vergrößert`}

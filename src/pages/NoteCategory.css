@@ -114,3 +114,6 @@
 .modal-arrow-right {
   right: 24px;
 }
+
+.blob-uploads-section  { 
+  padding: '40px 0'; border-top: '1px solid #eee'; margin-top: '40px' }
