@@ -40,37 +40,35 @@ export function Dashboard() {
           blogItems.map((item, index) => (
             <div key={`dash-${item.url}-${index}`} className="dashboard-card">
               
-              {/* FALL A: Der Beitrag ist ein TEXT */}
-              item.type === 'text' ? (
+              {/* FIXED: Hier stecken die Befehle jetzt wieder in der magischen geschweiften Klammer */}
+              {item.type === 'text' ? (
                 <div className="dashboard-text-content">
                   <p>{item.content}</p>
                 </div>
               ) : (
-                
-                {/* FALL B: Der Beitrag ist ein BILD */}
-              {/* FALL B: Der Beitrag ist ein BILD */}
-              <div className="dashboard-image-content">
-                <img src={item.url} alt={`Dashboard Upload ${index + 1}`} />
+                /* FALL B: Der Beitrag ist ein BILD */
+                <div className="dashboard-image-content">
+                  <img src={item.url} alt={`Dashboard Upload ${index + 1}`} />
+                </div>
+              )}
+
+              {/* Fußzeile für jeden Post mit dem Datum */}
+              <div className="dashboard-card-footer">
+                <span>
+                  🗓️ {new Date(item.uploadedAt).toLocaleDateString('de-DE', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })} Uhr
+                </span>
               </div>
-            )
 
-            {/* Fußzeile für jeden Post mit dem Datum */}
-            <div className="dashboard-card-footer">
-              <span>
-                🗓️ {new Date(item.uploadedAt).toLocaleDateString('de-DE', {
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })} Uhr
-              </span>
             </div>
-
-          </div>
-        ))
-      )}
-    </section>
-  </main>
-)
+          ))
+        )}
+      </section>
+    </main>
+  )
 }
