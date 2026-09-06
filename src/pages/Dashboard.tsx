@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './Dashboard.css' // Eine eigene CSS-Datei für das Blog-Design
 
 export function Dashboard() {

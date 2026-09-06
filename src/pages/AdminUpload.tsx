@@ -8,7 +8,6 @@ export default function AdminUpload() {
   const [file, setFile] = useState<File | null>(null);
   const [blogText, setBlogText] = useState('');
   const [status, setStatus] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
 
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
