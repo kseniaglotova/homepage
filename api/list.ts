@@ -9,18 +9,37 @@ export default async function handler(request: VercelRequest, response: VercelRe
   }
 
   try {
-    // Holt alle Dateien, die im "virtuellen Ordner" notes/kategorie/ liegen
     const { blobs } = await list({
       prefix: `notes/${category}/`,
     });
 
-    // Gibt die URLs der Bilder an deine Website zurück
-    // Wir geben jetzt eine Liste von Objekten zurück, die URL und Datum enthalten
-    return response.status(200).json(blobs.map(blob => ({
-      url: blob.url,
-      uploadedAt: blob.uploadedAt
-    })));
+    // Wir gehen alle gefundenen Dateien durch
+    const formattedBlobs = await Promise.all(blobs.map(async (blob) => {
+      // Wenn es eine JSON-Textdatei ist, laden wir den Text direkt im Hintergrund herunter
+      if (blob.url.endsWith('.json')) {
+        try {
+          const textResponse = await fetch(blob.url);
+          const jsonContent = await textResponse.json();
+          return {
+            url: blob.url,
+            uploadedAt: blob.uploadedAt,
+            type: 'text',
+            content: jsonContent.text // Hier steckt dein geschriebener Text drin!
+          };
+        } catch {
+          return { url: blob.url, uploadedAt: blob.uploadedAt, type: 'text', content: 'Fehler beim Laden des Textes.' };
+        }
+      }
 
+      // Wenn es ein normales Bild ist
+      return {
+        url: blob.url,
+        uploadedAt: blob.uploadedAt,
+        type: 'image'
+      };
+    }));
+
+    return response.status(200).json(formattedBlobs);
   } catch (error) {
     return response.status(500).json({ error: (error as Error).message });
   }

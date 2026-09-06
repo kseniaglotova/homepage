@@ -6,6 +6,7 @@ import './App.css'
 import { SecretTestPage } from './pages/Test'
 
 import { NoteCategory } from './pages/NoteCategory'
+import { Dashboard } from './pages/Dashboard'
 
 import AdminUpload from './pages/AdminUpload';
 
@@ -59,7 +60,8 @@ function App() {
         })}
         <Route path="/notes/:categoryy" element={<NoteCategory />} />
         <Route path="/test" element={<SecretTestPage />} />
-        <Route path="/admin-upload" element={<AdminUpload />} />
+        <Route path="/admin" element={<AdminUpload />} />
+        <Route path="/dashboard" element={<Dashboard />} />
 
       </Routes>
 

@@ -1,0 +1,59 @@
+.dashboard-page {
+  width: min(800px, calc(100% - 40px)); /* Schmaler gehalten, perfekt für Lese-Texte */
+  margin: 40px auto;
+  font-family: sans-serif;
+}
+
+.dashboard-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.dashboard-kicker {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.dashboard-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Abstand zwischen den Blog-Einträgen */
+}
+
+.dashboard-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.dashboard-text-content {
+  padding: 25px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #222;
+  white-space: pre-wrap; /* Behält deine Zeilenumbrüche beim Tippen bei! */
+}
+
+.dashboard-image-content img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.dashboard-card-footer {
+  padding: 12px 25px;
+  background: #fafafa;
+  border-top: 1px solid #f5f5f5;
+  font-size: 12px;
+  color: #999;
+}
+
+.dashboard-empty {
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+}
