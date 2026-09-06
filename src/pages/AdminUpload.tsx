@@ -11,7 +11,7 @@ export default function AdminUpload() {
 
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file || !password) return setStatus('Bitte Passwort eingeben.');
+    if (!password) return setStatus('Bitte Passwort eingeben.');
 
     if (uploadType === 'image' && !file) return setStatus('Bitte eine Datei auswählen.');
     if (uploadType === 'text' && !blogText.trim()) return setStatus('Bitte einen Text eingeben.');
