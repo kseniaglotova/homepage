@@ -1,5 +1,5 @@
 .dashboard-page {
-  width: min(800px, calc(100% - 40px)); /* Schmaler gehalten, perfekt für Lese-Texte */
+  width: min(1180px, calc(100% - 40px));
   margin: 40px auto;
   font-family: sans-serif;
 }
@@ -40,12 +40,8 @@
 
 .dashboard-image-content img {
   width: 100%;
-  max-width: 600px;
-  max-height: 500px;
-  object-fit: contain;
   height: auto;
   display: block;
-  margin: 0 auto;
 }
 
 .dashboard-card-footer {
