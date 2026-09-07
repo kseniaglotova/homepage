@@ -21,7 +21,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
     }
 
     // 3. Virtuellen Pfad bauen (z.B. notes/food/mein-bild.jpg)
-    const blobPath = `${category}/${filename}`;
+    const blobPath = `notes/${category}/${filename}`;
 
     // 4. Direkt zu Vercel Blob hochladen
     const blob = await put(blobPath, request, {
