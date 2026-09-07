@@ -1,5 +1,5 @@
 .dashboard-page {
-  width: min(1180px, calc(50%));
+  width: min(1180px, calc(100% - 40px));
   margin: 40px auto;
   font-family: sans-serif;
 }
