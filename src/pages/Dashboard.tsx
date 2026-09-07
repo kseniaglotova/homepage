@@ -40,34 +40,32 @@ export function Dashboard() {
           blogItems.map((item, index) => (
             <div key={`dash-${item.url}-${index}`} className="dashboard-card">
               
-              {/* FIXED: Hier stecken die Befehle jetzt wieder in der magischen geschweiften Klammer */}
+              {/* FALL A: Reiner TEXT-BLOCK */}
               {item.type === 'text' ? (
                 <div className="dashboard-text-content">
                   <p>{item.content}</p>
                 </div>
               ) : (
-                /* FALL B: Der Beitrag ist ein BILD */
+                /* FALL B: BILD (Eventuell mit Caption darunter) */
                 <div className="dashboard-image-content">
                   <img src={item.url} alt={`Dashboard Upload ${index + 1}`} />
+                  
+                  {/* NEU: Wenn eine Caption existiert, blenden wir sie hier ein! */}
+                  {item.caption && (
+                    <div style={{ padding: '15px 25px', fontSize: '15px', color: '#333', borderTop: '1px solid #f9f9f9', background: '#fff' }}>
+                      <p style={{ margin: 0, lineHeight: '1.5', whiteSpace: 'pre-wrap' }}>{item.caption}</p>
+                    </div>
+                  )}
                 </div>
               )}
 
-              {/* Fußzeile für jeden Post mit dem Datum */}
+              {/* Fußzeile */}
               <div className="dashboard-card-footer">
-                <span>
-                  🗓️ {new Date(item.uploadedAt).toLocaleDateString('de-DE', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })} Uhr
-                </span>
+                <span>🗓️ {new Date(item.uploadedAt).toLocaleDateString('de-DE')}</span>
               </div>
 
             </div>
-          ))
-        )}
+          ))) }
       </section>
     </main>
   )

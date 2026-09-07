@@ -145,6 +145,7 @@ export function NoteCategory() {
             ←
           </button>
           
+                    {/* Suche das img im Modal und füge das Code-Stück direkt darunter ein: */}
           <img
             src={
               isBlobSelected 
@@ -154,6 +155,24 @@ export function NoteCategory() {
             alt={`${title} vergrößert`}
             className="modal-image"
           />
+
+          {/* NEU: Bildbeschriftung in der Großansicht anzeigen */}
+          {isBlobSelected && currentActiveImages[selectedIndex]?.caption && (
+            <div className="modal-caption" style={{
+              color: '#fff',
+              textAlign: 'center',
+              marginTop: '15px',
+              fontSize: '16px',
+              maxWidth: '80%',
+              lineHeight: '1.5',
+              background: 'rgba(0,0,0,0.6)',
+              padding: '10px 20px',
+              borderRadius: '6px'
+            }}>
+              {currentActiveImages[selectedIndex].caption}
+            </div>
+          )}
+
           
           <button
             type="button"
