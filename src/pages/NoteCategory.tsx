@@ -7,13 +7,20 @@ const imageModules = import.meta.glob(
     '../assets/notes/*/*.{jpg,jpeg,png,webp}',
     {eager: true, query: '?url', import: 'default'}) as Record<string, string>
 
+type BlobImage = {
+  url: string
+  uploadedAt: string
+  type?: 'image' | 'text'
+  caption?: string
+}
+
 export function NoteCategory() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [isBlobSelected, setIsBlobSelected] = useState<boolean>(false)
   const { categoryy } = useParams()
   
   // State für die Handy-Bilder von Vercel
-  const [blobImages, setBlobImages] = useState<any[]>([]);
+  const [blobImages, setBlobImages] = useState<BlobImage[]>([]);
 
   // 2. Lokale Bilder filtern
   const localImages = Object.entries(imageModules)
@@ -27,11 +34,11 @@ export function NoteCategory() {
       try {
         const response = await fetch(`/api/list?category=${categoryy}`)
         if (response.ok) {
-          const data = await response.json()
+          const data = await response.json() as Array<BlobImage | string>
           
           // SCHUTZFUNKTION: Wir wandeln alte Text-URLs automatisch in neue Objekte um,
           // falls die list.ts auf dem Server noch nicht aktualisiert wurde!
-          const formattedData = data.map((item: any) => {
+          const formattedData = data.map((item) => {
             if (typeof item === 'string') {
               return { url: item, uploadedAt: new Date().toISOString() }
             }
@@ -61,8 +68,13 @@ export function NoteCategory() {
     return timeB - timeA
   })
 
+  const imageItems = sortedBlobImages.filter((imageObj) => imageObj?.type !== 'text')
+
   // Bestimmt, aus welcher Liste das vergrößerte Bild kommt
-  const currentActiveImages = isBlobSelected ? sortedBlobImages : localImages
+  const currentActiveImages = isBlobSelected ? imageItems : localImages
+  const activeBlobImage = isBlobSelected && selectedIndex !== null
+    ? imageItems[selectedIndex]
+    : undefined
 
   return (
     <main className="note-category-page">
@@ -90,36 +102,29 @@ export function NoteCategory() {
       </section>
 
       {/* UNTEN: Die Handy-Bilder Galerie */}
-      {sortedBlobImages.length > 0 && (
+      {imageItems.length > 0 && (
         <section className="blob-uploads-section">
           <p className="note-category-kicker">MOBILE UPLOADS</p>
           
           <div className="blob-grid">
-                 {sortedBlobImages.map((imageObj, index) => (
+            {imageItems.map((imageObj, index) => (
               <div 
                 key={`blob-${imageObj?.url || index}-${index}`}
-                style={{ 
-                  width: '100%',
-                  aspectRatio: '1 / 1', 
-                  overflow: 'hidden',
-                  borderRadius: '6px',
-                  backgroundColor: '#f9f9f9'
-                }}
               >
-                <img
-                  src={imageObj?.url || ''}
-                  alt={`${title} Upload ${index + 1}`}
-                  style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover', 
-                    cursor: 'pointer' 
-                  }}
-                  onClick={() => {
-                    setIsBlobSelected(true)
-                    setSelectedIndex(index)
-                  }}
-                />
+                <div className="note-image-frame">
+                  <img
+                    src={imageObj?.url || ''}
+                    alt={`${title} Upload ${index + 1}`}
+                    onClick={() => {
+                      setIsBlobSelected(true)
+                      setSelectedIndex(index)
+                    }}
+                  />
+                </div>
+                <p className="note-image-meta">
+                  {new Date(imageObj.uploadedAt).toLocaleDateString('de-DE')}
+                  {imageObj.caption && ` · ${imageObj.caption}`}
+                </p>
               </div>
             ))}
           </div>
@@ -149,7 +154,7 @@ export function NoteCategory() {
           <img
             src={
               isBlobSelected 
-                ? (currentActiveImages[selectedIndex]?.url || '') 
+                ? (activeBlobImage?.url || '') 
                 : (currentActiveImages[selectedIndex] as string)
             }
             alt={`${title} vergrößert`}
@@ -157,7 +162,7 @@ export function NoteCategory() {
           />
 
           {/* NEU: Bildbeschriftung in der Großansicht anzeigen */}
-          {isBlobSelected && currentActiveImages[selectedIndex]?.caption && (
+          {isBlobSelected && activeBlobImage?.caption && (
             <div className="modal-caption" style={{
               color: '#fff',
               textAlign: 'center',
@@ -169,7 +174,7 @@ export function NoteCategory() {
               padding: '10px 20px',
               borderRadius: '6px'
             }}>
-              {currentActiveImages[selectedIndex].caption}
+              {activeBlobImage.caption}
             </div>
           )}
 

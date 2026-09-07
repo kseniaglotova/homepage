@@ -133,6 +133,28 @@
   gap: 16px;
 }
 
+.note-image-frame {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+
+.note-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+.note-image-meta {
+  margin: 8px 0 0;
+  color: #666;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
 @media (max-width: 550px) {
   .blob-grid {
     grid-template-columns: 1fr 1fr;

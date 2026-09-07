@@ -1,6 +1,9 @@
 import { list } from '@vercel/blob';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+type JsonContent = { text?: string; caption?: string };
+type ListItem = { type: 'image' | 'text'; url: string; uploadedAt: Date; content?: string; caption?: string | null };
+
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   const { category } = request.query;
   if (!category) return response.status(400).json({ error: 'Kategorie fehlt' });
@@ -19,14 +22,14 @@ export default async function handler(request: VercelRequest, response: VercelRe
         const data = await res.json();
         // Wir merken uns den Basisnamen ohne ".json"
         const baseName = blob.url.substring(0, blob.url.lastIndexOf('.json'));
-        return { baseName, data, uploadedAt: blob.uploadedAt, url: blob.url };
+        return { baseName, data: data as JsonContent, uploadedAt: blob.uploadedAt, url: blob.url };
       } catch {
         return null;
       }
     }));
 
     // 3. Wir bauen das finale Ergebnis zusammen
-    const result: any[] = [];
+    const result: ListItem[] = [];
 
     // A: Reine Textblöcke finden (JSON-Dateien, die KEIN Bild neben sich haben)
     jsonContents.forEach(json => {

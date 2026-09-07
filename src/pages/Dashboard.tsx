@@ -1,8 +1,16 @@
 import { useState, useEffect } from 'react'
 import './Dashboard.css' // Eine eigene CSS-Datei für das Blog-Design
 
+type DashboardItem = {
+  url: string
+  uploadedAt: string
+  type: 'image' | 'text'
+  content?: string
+  caption?: string
+}
+
 export function Dashboard() {
-  const [blogItems, setBlogItems] = useState<any[]>([])
+  const [blogItems, setBlogItems] = useState<DashboardItem[]>([])
 
   // Holt die Daten exakt aus der "dashboard"-Kategorie deines Backends
   useEffect(() => {
@@ -10,10 +18,10 @@ export function Dashboard() {
       try {
         const response = await fetch('/api/list?category=dashboard')
         if (response.ok) {
-          const data = await response.json()
+          const data = await response.json() as DashboardItem[]
           
           // Chronologisch sortieren: Neueste Beiträge ganz nach oben
-          const sorted = data.sort((a: any, b: any) => 
+          const sorted = data.sort((a, b) => 
             new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
           )
           setBlogItems(sorted)

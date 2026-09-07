@@ -40,8 +40,12 @@
 
 .dashboard-image-content img {
   width: 100%;
+  max-width: 600px;
+  max-height: 500px;
+  object-fit: contain;
   height: auto;
   display: block;
+  margin: 0 auto;
 }
 
 .dashboard-card-footer {
