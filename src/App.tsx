@@ -1,14 +1,12 @@
 import { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, NavLink, Link, useLocation, } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink, useLocation } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
-import { mainCategories } from './mainCategories'
+import { Personal } from './pages/Personal'
 import './App.css'
-import { SecretTestPage } from './pages/Test'
-
 import { NoteCategory } from './pages/NoteCategory'
-import { Dashboard } from './pages/Dashboard'
+import { Bike } from './pages/Bike'
 
-import AdminUpload from './pages/AdminUpload';
+import AdminUpload from './pages/AdminUpload'
 
 
 function ScrollToTop() {
@@ -32,37 +30,17 @@ function App() {
         <NavLink to="/" className="nav-link">
           Home
         </NavLink>
-
-        {mainCategories.map((category) => (
-          <NavLink
-            key={category.path}
-            to={category.path}
-            className="nav-link"
-          >
-            {category.label}
-          </NavLink>
-        ))}
+        <NavLink to="/personal" className="nav-link">
+          Personal
+        </NavLink>
       </nav>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-
-        {mainCategories.map((category) => {
-          const Page = category.component
-
-          return (
-            <Route
-              key={category.path}
-              path={category.path}
-              element={<Page />}
-            />
-          )
-        })}
+        <Route path="/personal" element={<Personal />} />
         <Route path="/notes/:categoryy" element={<NoteCategory />} />
-        <Route path="/test" element={<SecretTestPage />} />
+        <Route path="/bike" element={<Bike />} />
         <Route path="/admin" element={<AdminUpload />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-
       </Routes>
 
       <footer className="footer">
@@ -70,10 +48,6 @@ function App() {
           <p className="footer-copy">
             © 2026 Ksenia Glotova
           </p>
-
-            <Link to="/test" className="secret-link" aria-label="Geheimer Bereich">
-            🔒
-            </Link>
 
           <nav className="footer-links">
             <a href="https://www.instagram.com/kseniaglotovaa/">

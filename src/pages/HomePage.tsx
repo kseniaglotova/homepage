@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import { mainCategories } from '../mainCategories'
+
 import './HomePage.css'
+import './Personal.css'
 
 export function HomePage() {
     return (
@@ -13,35 +13,32 @@ export function HomePage() {
                     </div>
 
                     <div className="hero-meta">
-                        <p className="hero-meta-strong">Learning by doing.</p>
+                        <p className="hero-meta-strong">Welcome!</p>
                         <p className="hero-meta-small">
-                            Hallo, das ist meine Website.
+                            Dual Student in Business Informatics - Data Science.
                         </p>
                     </div>
                 </div>
             </section>
 
-            <section className="button-section">
-                <div className="section-heading">
-                    <p className="section-kicker">EXPLORE</p>
-                    <h2>Meine Bereiche</h2>
-                </div>
+            <section className="personal-page">
+    <section className="info-card">
+      <h2>Education</h2>
+      <ul>
+        <li><strong>Dual Study Program:</strong> Business Informatics - Data Science | 2026 - Present</li>
+        <li><strong>Abitur (GPA 1.3):</strong> Advanced Courses: Mathematics, Physics, Chemistry</li>
+      </ul>
+    </section>
 
-                <div className="button-grid">
-                    {mainCategories.map((category, index) => (
-                        <Link
-                            key={category.path}
-                            to={category.path}
-                            className="category-box"
-                            style={{ '--card-index': index } as React.CSSProperties}
-                        >
-                            <span className="category-number">0{index + 1}</span>
-                            <span className="category-label">{category.label}</span>
-                            <span className="category-arrow">↗</span>
-                        </Link>
-                    ))}
-                </div>
-            </section>
+<section className="info-card">
+      <h2>Tech-Stack & Skills</h2>
+      <ul>
+        <li><strong>Programming Languages:</strong> TypeScript, JavaScript, C#</li>
+        <li><strong>Frameworks & Libraries:</strong> React, Vite</li>
+        <li><strong>Tools:</strong> VS Code, Git</li>
+      </ul>
+    </section>
+    </section>
         </main>
     )
 }

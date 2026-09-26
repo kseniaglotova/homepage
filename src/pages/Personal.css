@@ -11,18 +11,23 @@
   background: var(--background);
   font-family: "DM Sans", sans-serif;
   padding-bottom: 20px;
+  width: 100%;
 }
 .personal-page,
 .personal-page * {
   box-sizing: border-box;
 }
 .personal-page > * {
-  width: min(1000px, 100%);
+  width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
 }
 
+.personal-page > .dashboard-page {
+  margin: 40px auto;
+}
+
 .hero-section {
-  padding: 20px 0 20px;
+  padding: 20px 0 0;
 }
 
 .hero-section::before {
@@ -31,13 +36,6 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.18em;
-}
-
-.hero-section h1 {
-  max-width: 720px;
-  margin: 0;
-  font-size: clamp(4rem, 12vw, 8.5rem);
-  letter-spacing: -0.08em;
 }
 
 .subtitle {
@@ -59,6 +57,7 @@
 
 .info-card {
   margin-bottom: 24px;
+  margin-top: 24px;
   padding: 32px;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -87,56 +86,6 @@
   font-size: 1.4rem;
 }
 
-.info-card ul {
-  padding: 0;
-  list-style: none;
-}
-
-.info-card li {
-  padding-bottom: 10px;
-  padding-top: 10px;
-  border-bottom: 1px solid var(--line);
-  color: var(--muted);
-}
-
-.info-card li:last-child {
-  padding-bottom: 0;
-  border-bottom: 0;
-}
-
-.info-card strong {
-  color: var(--text);
-}
-
-.interactive-fact {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.opinion-text {
-  color: var(--text);
-  font-weight: 700;
-}
-
-.opinion-button {
-  padding: 10px 14px;
-  border: 0;
-  border-radius: 999px;
-  color: #fff;
-  background: var(--text);
-  font: inherit;
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 180ms ease, transform 180ms ease;
-}
-
-.opinion-button:hover {
-  background: var(--accent);
-  transform: translateY(-2px);
-}
-
 .future-section {
   color: #fff;
   background: #20211f;
@@ -154,12 +103,10 @@
 
 @media (max-width: 600px) {
   .personal-page {
-    padding: 10px 10px;
+    padding-bottom: 20px;
   }
 
-
-  .interactive-fact {
-    align-items: flex-start;
-    flex-direction: column;
+  .personal-page > * {
+    width: calc(100% - 20px);
   }
 }

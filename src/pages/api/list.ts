@@ -5,11 +5,22 @@ type JsonContent = { text?: string; caption?: string };
 type ListItem = { type: 'image' | 'text'; url: string; uploadedAt: Date; content?: string; caption?: string | null };
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
-  const { category } = request.query;
+  const categoryValue = request.query.category;
+  const category = Array.isArray(categoryValue) ? categoryValue[0] : categoryValue;
   if (!category) return response.status(400).json({ error: 'Kategorie fehlt' });
 
   try {
-    const { blobs } = await list({ prefix: `notes/${category}/` });
+    const isDashboard = category === 'dashboard';
+    const isNoteCategory = ['food', 'places', 'rides'].includes(category);
+    if (!isDashboard && !isNoteCategory) {
+      return response.status(400).json({ error: 'Ungültige Kategorie' });
+    }
+
+    const prefixes = isDashboard
+      ? ['dashboard/', 'notes/dashboard/']
+      : [`notes/${category}/`];
+    const blobLists = await Promise.all(prefixes.map((prefix) => list({ prefix })));
+    const blobs = blobLists.flatMap(({ blobs: categoryBlobs }) => categoryBlobs);
 
     // 1. Wir trennen alle JSON-Dateien von den Bildern
     const imageBlobs = blobs.filter(b => !b.url.endsWith('.json'));
@@ -21,7 +32,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
         const res = await fetch(blob.url);
         const data = await res.json();
         // Wir merken uns den Basisnamen ohne ".json"
-        const baseName = blob.url.substring(0, blob.url.lastIndexOf('.json'));
+        const baseName = blob.pathname.replace(/\.json$/, '');
         return { baseName, data: data as JsonContent, uploadedAt: blob.uploadedAt, url: blob.url };
       } catch {
         return null;
@@ -47,7 +58,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
 
     // B: Bilder verarbeiten und prüfen, ob sie eine Caption-JSON haben
     imageBlobs.forEach(img => {
-      const imgBaseName = img.url.substring(0, img.url.lastIndexOf('.'));
+      const imgBaseName = img.pathname.replace(/\.[^.]+$/, '');
       // Suchen, ob es eine JSON-Datei mit exakt demselben Basisnamen gibt
       const matchingJson = jsonContents.find(j => j && j.baseName === imgBaseName && j.data.caption);
 

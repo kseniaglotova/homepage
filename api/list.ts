@@ -2,16 +2,25 @@ import { list } from '@vercel/blob';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
-  const { category } = request.query;
+  const categoryValue = request.query.category;
+  const category = Array.isArray(categoryValue) ? categoryValue[0] : categoryValue;
 
   if (!category) {
     return response.status(400).json({ error: 'Kategorie fehlt' });
   }
 
   try {
-    const { blobs } = await list({
-      prefix: `notes/${category}/`,
-    });
+    const isDashboard = category === 'dashboard';
+    const isNoteCategory = ['food', 'places', 'rides'].includes(category);
+    if (!isDashboard && !isNoteCategory) {
+      return response.status(400).json({ error: 'Ungültige Kategorie' });
+    }
+
+    const prefixes = isDashboard
+      ? ['dashboard/', 'notes/dashboard/']
+      : [`notes/${category}/`];
+    const blobLists = await Promise.all(prefixes.map((prefix) => list({ prefix })));
+    const blobs = blobLists.flatMap(({ blobs: categoryBlobs }) => categoryBlobs);
 
     const jsonFiles = new Map<string, { text?: string; caption?: string }>();
 
@@ -20,8 +29,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
       try {
         const textResponse = await fetch(blob.url);
         const jsonContent = await textResponse.json();
-        const filename = blob.pathname.split('/').pop() || '';
-        jsonFiles.set(filename.replace(/\.json$/, ''), jsonContent);
+        jsonFiles.set(blob.pathname.replace(/\.json$/, ''), jsonContent);
       } catch {
         // Eine kaputte Zusatzdatei soll die übrigen Bilder nicht blockieren.
       }
@@ -32,8 +40,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
         return [];
       }
 
-      const filename = blob.pathname.split('/').pop() || '';
-      const baseName = filename.replace(/\.[^.]+$/, '');
+      const baseName = blob.pathname.replace(/\.[^.]+$/, '');
       const extra = jsonFiles.get(baseName);
 
       return [{
@@ -48,8 +55,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
     const textItems = blobs
       .filter((blob) => blob.url.endsWith('.json'))
       .flatMap((blob) => {
-        const filename = blob.pathname.split('/').pop() || '';
-        const content = jsonFiles.get(filename.replace(/\.json$/, ''));
+        const content = jsonFiles.get(blob.pathname.replace(/\.json$/, ''));
         return content?.text
           ? [{ url: blob.url, uploadedAt: blob.uploadedAt, type: 'text', content: content.text }]
           : [];

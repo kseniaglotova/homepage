@@ -17,6 +17,9 @@ export default function AdminUpload() {
 
     if (!currentPassword) return setStatus('Passwort eingeben.');
     if (uploadType === 'image' && !file) return setStatus('Datei auswählen.');
+    if (uploadType === 'text' && category !== 'dashboard') {
+      return setStatus('Reine Textbeiträge können nur im Dashboard gespeichert werden.');
+    }
     if (uploadType === 'text' && !blogText.trim()) return setStatus('Text eingeben.');
 
     setStatus('Verarbeitung läuft...');
@@ -96,7 +99,11 @@ export default function AdminUpload() {
 
         <label style={{ display: 'flex', flexDirection: 'column', gap: '5px', fontSize: '14px' }}>
           Kategorie auswählen:
-          <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ padding: '10px', fontSize: '16px' }}>
+          <select value={category} onChange={(e) => {
+            const nextCategory = e.target.value;
+            setCategory(nextCategory);
+            if (nextCategory !== 'dashboard') setUploadType('image');
+          }} style={{ padding: '10px', fontSize: '16px' }}>
             <option value="food">Food</option>
             <option value="places">Places</option>
             <option value="rides">Rides</option>

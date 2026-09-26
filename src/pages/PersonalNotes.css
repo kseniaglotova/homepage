@@ -1,13 +1,7 @@
-
-.notes-page{
-    background-color: #f1f0ec;
-    padding-bottom: 30px;
-}
 .notes-header {
-  width: min(1180px, 100%);
+  width: 100%;
   margin: 0 auto 42px;
   padding-left: 20px;
-  padding-top: 20px;
 }
 
 .notes-intro-small {
@@ -26,7 +20,7 @@
 }
 
 .notes-grid {
-  width: min(1100px, 100%);
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -55,7 +49,7 @@
   position: absolute;
   z-index: 1;
   inset: 35% 0 0;
-  background: linear-gradient(to bottom, transparent,rgba(0, 0, 0, 0.82));
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.82));
 }
 
 .note-card-title {
@@ -79,21 +73,16 @@
 
 @media (max-width: 900px) {
   .notes-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-    
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .note-card{margin: 10px 10px}
 }
 
 @media (max-width: 560px) {
-  
   .notes-grid {
     grid-template-columns: 1fr;
-    margin: 10px 10px
   }
 
   .note-card {
     aspect-ratio: 1.35 / 1;
-    margin: 10px 10px;
   }
 }

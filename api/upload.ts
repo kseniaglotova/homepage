@@ -14,18 +14,33 @@ export default async function handler(request: VercelRequest, response: VercelRe
 
   try {
     // 2. Parameter aus der URL holen
-    const { filename, contentType, category } = request.query;
-    
-    if (!filename || !category) {
+    const { filename, contentType } = request.query;
+    const categoryValue = request.query.category;
+    const category = Array.isArray(categoryValue) ? categoryValue[0] : categoryValue;
+    const filenameValue = Array.isArray(filename) ? filename[0] : filename;
+    const contentTypeValue = Array.isArray(contentType) ? contentType[0] : contentType;
+
+    if (!filenameValue || !category) {
       return response.status(400).json({ error: 'Dateiname und Kategorie fehlen.' });
     }
 
-    // 3. Virtuellen Pfad bauen (z.B. notes/food/mein-bild.jpg)
-    const blobPath = `notes/${category}/${filename}`;
+    const isDashboard = category === 'dashboard';
+    const isNoteCategory = ['food', 'places', 'rides'].includes(category);
+    if (!isDashboard && !isNoteCategory) {
+      return response.status(400).json({ error: 'Ungültige Kategorie.' });
+    }
+
+    if (filenameValue.includes('/') || filenameValue.includes('\\')) {
+      return response.status(400).json({ error: 'Ungültiger Dateiname.' });
+    }
+
+    const blobPath = isDashboard
+      ? `dashboard/${filenameValue}`
+      : `notes/${category}/${filenameValue}`;
 
     // 4. Direkt zu Vercel Blob hochladen
     const blob = await put(blobPath, request, {
-      contentType: contentType as string,
+      contentType: contentTypeValue as string,
       access: 'public',
     });
 

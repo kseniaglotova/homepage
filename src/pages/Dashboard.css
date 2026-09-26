@@ -1,7 +1,6 @@
 .dashboard-page {
-  width: min(1180px, calc(100% - 40px));
-  margin: 40px auto;
-  font-family: sans-serif;
+  width: 100%;
+  margin: 40px auto 0;
 }
 
 .dashboard-header {
@@ -16,10 +15,11 @@
   margin-bottom: 5px;
 }
 
-.dashboard-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 30px; /* Abstand zwischen den Blog-Einträgen */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 18px;
 }
 
 .dashboard-card {
@@ -28,6 +28,7 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  min-width: 0;
 }
 
 .dashboard-text-content {
@@ -35,13 +36,31 @@
   font-size: 16px;
   line-height: 1.6;
   color: #222;
-  white-space: pre-wrap; /* Behält deine Zeilenumbrüche beim Tippen bei! */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  aspect-ratio: 4 / 3;
+}
+
+.dashboard-text-content p {
+  margin: 0;
 }
 
 .dashboard-image-content img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
   display: block;
+}
+
+.dashboard-caption {
+  margin: 0;
+  padding: 15px 20px;
+  border-top: 1px solid #f9f9f9;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .dashboard-card-footer {
@@ -53,7 +72,20 @@
 }
 
 .dashboard-empty {
+  grid-column: 1 / -1;
   text-align: center;
   color: #aaa;
   font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
 }
