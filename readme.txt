@@ -1,1 +1,1 @@
-Projektbeschreibung
+Projektbeschreibung. 

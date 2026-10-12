@@ -33,9 +33,9 @@ export function HomePage() {
 <section className="info-card">
       <h2>Tech-Stack & Skills</h2>
       <ul>
-        <li><strong>Programming Languages:</strong> TypeScript, JavaScript, C#</li>
-        <li><strong>Frameworks & Libraries:</strong> React, Vite</li>
-        <li><strong>Tools:</strong> VS Code, Git</li>
+        <li><strong>Programming Languages:</strong> TypeScript, JavaScript, C#, Python</li>
+        <li><strong>Frameworks & Libraries:</strong> React, Vite, HTML5, CSS3,</li>
+        <li><strong>Tools:</strong> VS Code, Git, GitHub, Node.js</li>
       </ul>
     </section>
     </section>
