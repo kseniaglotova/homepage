@@ -16,10 +16,9 @@
 }
 
 .dashboard-slider {
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: hidden;
   scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
 }
 
 .dashboard-track {
@@ -100,8 +99,6 @@
 .dashboard-slider {
   flex: 1;
   min-width: 0;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
 }
 
 .dashboard-arrow {

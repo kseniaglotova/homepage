@@ -11,43 +11,38 @@ type DashboardItem = {
 
 export function Dashboard() {
   const [blogItems, setBlogItems] = useState<DashboardItem[]>([])
-
   const sliderRef = useRef<HTMLDivElement>(null)
 
   const scrollDashboard = (direction: -1 | 1) => {
     const slider = sliderRef.current
     const track = slider?.querySelector<HTMLElement>('.dashboard-track')
     const card = track?.querySelector<HTMLElement>('.dashboard-card')
-
     if (!slider || !track || !card) return
 
     const gap = Number.parseFloat(getComputedStyle(track).columnGap) || 0
-    const distance = card.getBoundingClientRect().width + gap
-
-    slider.scrollBy({
-      left: direction * distance,
-      behavior: 'smooth',
-    })
+    slider.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: 'smooth' })
   }
 
   useEffect(() => {
-    async function fetchDashboardItems() {
+    const loadItems = async () => {
       try {
         const response = await fetch('/api/list?category=dashboard')
-        if (response.ok) {
-          const data = await response.json() as DashboardItem[]
-          
-          const sorted = data.sort((a, b) =>
+        if (!response.ok) {
+          throw new Error(`Dashboard konnte nicht geladen werden: ${response.status}`)
+        }
+
+        const items = await response.json() as DashboardItem[]
+        setBlogItems(
+          items.sort((a, b) =>
             new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime()
           )
-          setBlogItems(sorted)
-        }
+        )
       } catch (error) {
-        console.error("Fehler beim Laden des Dashboards:", error)
+        console.error('Fehler beim Laden des Dashboards:', error)
       }
     }
 
-    fetchDashboardItems()
+    void loadItems()
   }, [])
 
   return (
@@ -71,28 +66,21 @@ export function Dashboard() {
           <div className="dashboard-track">
             {blogItems.length === 0 ? (
               <p className="dashboard-empty">Noch keine Beiträge im Dashboard vorhanden.</p>
-            ) : (
-              blogItems.map((item, index) => (
-                <article key={`dash-${item.url}-${index}`} className="dashboard-card">
-                  {item.type === 'text' ? (
-                    <div className="dashboard-text-content">
-                      <p>{item.content}</p>
-                    </div>
-                  ) : (
-                    <div className="dashboard-image-content">
-                      <img src={item.url} alt={`Dashboard Upload ${index + 1}`} />
-                      {item.caption && (
-                        <p className="dashboard-caption">{item.caption}</p>
-                      )}
-                    </div>
-                  )}
-
-                  <div className="dashboard-card-footer">
-                    <span>🗓️ {new Date(item.uploadedAt).toLocaleDateString('de-DE')}</span>
+            ) : blogItems.map((item, index) => (
+              <article className="dashboard-card" key={`${item.url}-${index}`}>
+                {item.type === 'text' ? (
+                  <div className="dashboard-text-content"><p>{item.content}</p></div>
+                ) : (
+                  <div className="dashboard-image-content">
+                    <img src={item.url} alt={`Dashboard Upload ${index + 1}`} />
+                    {item.caption && <p className="dashboard-caption">{item.caption}</p>}
                   </div>
-                </article>
-              ))
-            )}
+                )}
+                <div className="dashboard-card-footer">
+                  <span>🗓️ {new Date(item.uploadedAt).toLocaleDateString('de-DE')}</span>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
 
