@@ -30,12 +30,17 @@
 
 .food-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.food-item {
+.food-card {
   min-width: 0;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(23, 43, 64, 0.05);
 }
 
 .food-image-button {
@@ -44,7 +49,6 @@
   padding: 0;
   overflow: hidden;
   border: 0;
-  border-radius: 6px;
   background: var(--surface-muted);
   cursor: zoom-in;
 }
@@ -52,24 +56,27 @@
 .food-image-button img {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-.food-date {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 0.75rem;
-  line-height: 1.4;
-}
-
 .food-description {
-  margin: 6px 0 0;
+  margin: 0;
+  padding: 15px 20px;
   color: var(--text);
-  font-size: 0.95rem;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
   line-height: 1.5;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+.food-card-footer {
+  padding: 12px 25px;
+  color: var(--muted);
+  background: var(--surface-muted);
+  border-top: 1px solid var(--line);
+  font-size: 12px;
 }
 
 .food-modal {
@@ -116,11 +123,15 @@
   .food-message {
     width: calc(100% - 36px);
   }
+
+  .food-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 550px) {
   .food-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px 12px;
+    gap: 18px;
   }
 }

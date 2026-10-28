@@ -54,7 +54,7 @@ export function Food() {
       {images.length > 0 && (
         <section className="food-grid" aria-label="Food-Bilder">
           {images.map((image, index) => (
-            <article className="food-item" key={`${image.url}-${index}`}>
+            <article className="food-card" key={`${image.url}-${index}`}>
               <button
                 type="button"
                 className="food-image-button"
@@ -63,12 +63,12 @@ export function Food() {
               >
                 <img src={image.url} alt={image.caption || `Food-Bild ${index + 1}`} />
               </button>
-              {image.uploadedAt && (
-                <p className="food-date">
-                  {new Date(image.uploadedAt).toLocaleDateString('de-DE')}
-                </p>
-              )}
               {image.caption && <p className="food-description">{image.caption}</p>}
+              {image.uploadedAt && (
+                <div className="food-card-footer">
+                  <span>🗓️ {new Date(image.uploadedAt).toLocaleDateString('de-DE')}</span>
+                </div>
+              )}
             </article>
           ))}
         </section>
