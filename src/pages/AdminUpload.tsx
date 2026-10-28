@@ -105,7 +105,7 @@ export default function AdminUpload() {
             if (nextCategory !== 'dashboard') setUploadType('image');
           }} style={{ padding: '10px', fontSize: '16px' }}>
             <option value="food">Food</option>
-            <option value="rides">Rides</option>
+            <option value="mobility">Mobility</option>
             <option value="dashboard">Dashboard(Blog)</option>
           </select>
         </label>

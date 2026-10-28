@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, NavLink, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { Personal } from './pages/Personal'
 import './App.css'
-import { NoteCategory } from './pages/NoteCategory'
+import { Food } from './pages/Food'
+import { Mobility } from './pages/Mobility'
 import { Bike } from './pages/Bike'
 
 import AdminUpload from './pages/AdminUpload'
@@ -38,7 +39,11 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/personal" element={<Personal />} />
-        <Route path="/notes/:categoryy" element={<NoteCategory />} />
+        <Route path="/food" element={<Food />} />
+        <Route path="/mobility" element={<Mobility />} />
+        <Route path="/notes/food" element={<Navigate to="/food" replace />} />
+        <Route path="/notes/rides" element={<Navigate to="/mobility" replace />} />
+        <Route path="/notes/:categoryy" element={<Navigate to="/personal" replace />} />
         <Route path="/bike" element={<Bike />} />
         <Route path="/admin" element={<AdminUpload />} />
       </Routes>

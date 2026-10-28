@@ -6,8 +6,8 @@ import { Dashboard } from './Dashboard'
 
 const noteCategories = [
   {
-    id: 'rides',
-    title: 'Rides',
+    id: 'mobility',
+    title: 'Mobility',
     image: '/suzuki-sv-seite.png',
   },
   {
@@ -35,7 +35,7 @@ export function Personal() {
         <nav className="notes-grid" aria-label="Notizkategorien">
           {noteCategories.map((category) => (
             <Link
-              to={`/notes/${category.id}`}
+              to={`/${category.id}`}
               className="note-card"
               key={category.id}
               aria-label={category.title}

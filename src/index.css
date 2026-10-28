@@ -1,3 +1,16 @@
+:root {
+  color-scheme: light;
+  --page-background: #edf3f8;
+  --surface: #f8fbff;
+  --surface-muted: #e2ebf3;
+  --text: #192b3d;
+  --muted: #64788c;
+  --accent: #76263a;
+  --accent-hover: #91374d;
+  --line: #cbd8e4;
+  --deep-blue: #172b40;
+}
+
 html, body, #root {
   margin: 0;
   padding: 0;
@@ -7,7 +20,6 @@ html, body, #root {
 }
 
 body {
-  background: #fff  ;
-  color: #000;
+  background: var(--page-background);
+  color: var(--text);
 }
-

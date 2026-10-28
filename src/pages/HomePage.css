@@ -1,6 +1,6 @@
 .home-page {
   min-height: calc(100vh - 64px);
-  background: #f1f0ec;
+  background: var(--page-background);
 }
 
 .hero-banner {
@@ -9,7 +9,7 @@
   min-height: min(560px, 70vh);
   border-radius: 0 0 28px 28px;
   background-image:
-    linear-gradient(90deg, rgba(14, 16, 15, 0.84), rgba(14, 16, 15, 0.2)),
+    linear-gradient(90deg, rgba(18, 35, 54, 0.88), rgba(18, 35, 54, 0.24)),
     url('/homepage-background.jpg');
   background-size: cover;
   background-position: center;
@@ -34,7 +34,7 @@
 .hero-kicker,
 .section-kicker {
   margin: 0 0 18px;
-  color: #d5b36a;
+  color: #e2a0ad;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -84,7 +84,7 @@
   align-items: baseline;
   display: flex;
   margin-bottom: 24px;
-  border-bottom: 1px solid #d8d5ce;
+  border-bottom: 1px solid var(--line);
 }
 
 .section-heading h2 {
@@ -103,13 +103,13 @@
   position: relative;
   min-height: 50px;
   padding: 20px;
-  border: 1px solid #d8d5ce;
+  border: 1px solid var(--line);
   border-radius: 16px;
   display: flex;
-  color: #000;
+  color: var(--text);
   flex-direction: column;
   justify-content: space-between;
-  background: #fff;
+  background: var(--surface);
   text-decoration: none;
   animation: card-in 0.55s ease-out both;
   animation-delay: calc(var(--card-index) * 70ms);
@@ -119,11 +119,11 @@
 .category-box:hover {
   transform: translateY(-7px);
   color: #fff;
-  background: #b9b49e;
+  background: var(--accent);
 }
 
 .category-number {
-  color: #a8a69e;
+  color: var(--muted);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
 }

@@ -1,14 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 .personal-page {
-  --background: #f5f3ee;
-  --surface: #fffdf8;
-  --text: #000;
-  --muted: #716f68;
-  --accent: #e16b4c;
-  --line: #dedbd2;
   color: var(--text);
-  background: var(--background);
+  background: var(--page-background);
   font-family: "DM Sans", sans-serif;
   padding-bottom: 20px;
   width: 100%;
@@ -61,14 +55,14 @@
   padding: 32px;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: rgba(255, 253, 248, 0.82);
-  box-shadow: 0 16px 40px rgba(30, 25, 20, 0.05);
+  background: rgba(248, 251, 255, 0.88);
+  box-shadow: 0 16px 40px rgba(23, 43, 64, 0.07);
   transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .info-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 22px 50px rgba(30, 25, 20, 0.1);
+  box-shadow: 0 22px 50px rgba(23, 43, 64, 0.13);
 }
 
 .info-card h2 {
@@ -88,16 +82,16 @@
 
 .future-section {
   color: #fff;
-  background: #20211f;
+  background: var(--deep-blue);
 }
 
 .future-section p {
-  color: #c6c5bd;
+  color: #c3d0dc;
 }
 
 .future-section p.highlight {
   margin-bottom: 0;
-  color: #f3b29f;
+  color: #e5a0ad;
   font-weight: 700;
 }
 

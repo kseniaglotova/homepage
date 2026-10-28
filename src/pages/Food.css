@@ -1,0 +1,126 @@
+.food-page {
+  min-height: calc(100vh - 70px);
+  padding: 56px 0 80px;
+  background: var(--page-background);
+  color: var(--text);
+}
+
+.food-header,
+.food-grid,
+.food-message {
+  width: min(1180px, calc(100% - 64px));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.food-header {
+  margin-bottom: 30px;
+}
+
+.food-header h1 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+}
+
+.food-message {
+  color: var(--muted);
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px 16px;
+}
+
+.food-item {
+  min-width: 0;
+}
+
+.food-image-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 6px;
+  background: var(--surface-muted);
+  cursor: zoom-in;
+}
+
+.food-image-button img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.food-date {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.food-description {
+  margin: 6px 0 0;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.food-modal {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  background: rgba(18, 35, 54, 0.9);
+  color: var(--surface);
+}
+
+.food-modal > img {
+  max-width: min(900px, 90vw);
+  max-height: 78vh;
+  object-fit: contain;
+}
+
+.food-modal > p {
+  max-width: min(700px, 90vw);
+  margin: 0;
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+.food-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  border: 0;
+  background: transparent;
+  color: var(--surface);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .food-header,
+  .food-grid,
+  .food-message {
+    width: calc(100% - 36px);
+  }
+}
+
+@media (max-width: 550px) {
+  .food-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+}

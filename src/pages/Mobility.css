@@ -1,0 +1,70 @@
+.mobility-page {
+  min-height: calc(100vh - 70px);
+  padding: 56px 0 80px;
+  background: var(--page-background);
+  color: var(--text);
+}
+
+.mobility-header {
+  width: min(1180px, calc(100% - 64px));
+  margin: 0 auto 30px;
+}
+
+.mobility-header h1 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+}
+
+.mobility-gallery {
+  width: 100%;
+  overflow: hidden;
+}
+
+.mobility-track {
+  display: flex;
+  width: max-content;
+  gap: 18px;
+  animation: mobility-scroll 30s linear infinite;
+}
+
+.mobility-track img {
+  width: 300px;
+  height: 300px;
+  flex: 0 0 300px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+@keyframes mobility-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+@media (max-width: 700px) {
+  .mobility-header {
+    width: calc(100% - 36px);
+  }
+
+  .mobility-track {
+    gap: 12px;
+  }
+
+  .mobility-track img {
+    width: 210px;
+    height: 280px;
+    flex-basis: 210px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobility-track {
+    animation: none;
+  }
+}

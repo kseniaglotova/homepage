@@ -11,14 +11,16 @@ export default async function handler(request: VercelRequest, response: VercelRe
 
   try {
     const isDashboard = category === 'dashboard';
-    const isNoteCategory = ['food', 'rides'].includes(category);
+    const isNoteCategory = ['food', 'mobility'].includes(category);
     if (!isDashboard && !isNoteCategory) {
       return response.status(400).json({ error: 'Ungültige Kategorie' });
     }
 
     const prefixes = isDashboard
       ? ['dashboard/', 'notes/dashboard/']
-      : [`notes/${category}/`];
+      : category === 'mobility'
+        ? ['notes/mobility/', 'notes/rides/']
+        : [`notes/${category}/`];
     const blobLists = await Promise.all(prefixes.map((prefix) => list({ prefix })));
     const blobs = blobLists.flatMap(({ blobs: categoryBlobs }) => categoryBlobs);
 
