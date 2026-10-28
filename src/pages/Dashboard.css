@@ -9,10 +9,10 @@
 }
 
 .dashboard-kicker {
+  margin-bottom: 5px;
+  color: var(--muted);
   font-size: 12px;
   letter-spacing: 2px;
-  color: var(--muted);
-  margin-bottom: 5px;
 }
 
 .dashboard-slider {
@@ -26,19 +26,19 @@
   display: flex;
   flex-wrap: nowrap;
   gap: 18px;
-  width: max-content;
+  width: 100%;
   padding-bottom: 8px;
 }
 
 .dashboard-card {
   flex: 0 0 calc((100% - 54px) / 4);
   min-width: 0;
+  overflow: hidden;
+  scroll-snap-align: start;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 12px;
-  overflow: hidden;
   box-shadow: 0 4px 12px rgba(23, 43, 64, 0.05);
-  scroll-snap-align: start;
 }
 
 .dashboard-text-content,
@@ -68,8 +68,8 @@
 .dashboard-caption {
   margin: 0;
   padding: 15px 20px;
-  border-top: 1px solid var(--line);
   color: var(--text);
+  border-top: 1px solid var(--line);
   font-size: 14px;
   line-height: 1.5;
   white-space: pre-wrap;
@@ -78,17 +78,57 @@
 
 .dashboard-card-footer {
   padding: 12px 25px;
+  color: var(--muted);
   background: var(--surface-muted);
   border-top: 1px solid var(--line);
   font-size: 12px;
-  color: var(--muted);
 }
 
 .dashboard-empty {
-  grid-column: 1 / -1;
-  text-align: center;
+  flex: 0 0 100%;
   color: var(--muted);
+  text-align: center;
   font-style: italic;
+}
+
+.dashboard-carousel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dashboard-slider {
+  flex: 1;
+  min-width: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.dashboard-arrow {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.dashboard-arrow:hover {
+  background: var(--surface-muted);
+  transform: scale(1.05);
+}
+
+.dashboard-arrow:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
 }
 
 @media (max-width: 900px) {
@@ -98,6 +138,16 @@
 }
 
 @media (max-width: 560px) {
+  .dashboard-carousel {
+    gap: 8px;
+  }
+
+  .dashboard-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 26px;
+  }
+
   .dashboard-card {
     flex-basis: 100%;
   }
