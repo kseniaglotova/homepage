@@ -150,9 +150,17 @@
 .note-image-meta {
   margin: 8px 0 0;
   color: #666;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   line-height: 1.4;
+}
+
+.note-image-description {
+  margin: 6px 0 0;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.5;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 550px) {

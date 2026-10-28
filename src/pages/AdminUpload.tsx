@@ -6,7 +6,7 @@ export default function AdminUpload() {
   const [uploadType, setUploadType] = useState<'image' | 'text'>('image');
   const [file, setFile] = useState<File | null>(null);
   const [customName, setCustomName] = useState('');
-  const [blogText, setBlogText] = useState(''); // Wird für reinen Text UND Captions genutzt
+  const [description, setDescription] = useState('')
   const [status, setStatus] = useState('');
 
   const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,7 +20,7 @@ export default function AdminUpload() {
     if (uploadType === 'text' && category !== 'dashboard') {
       return setStatus('Reine Textbeiträge können nur im Dashboard gespeichert werden.');
     }
-    if (uploadType === 'text' && !blogText.trim()) return setStatus('Text eingeben.');
+    if (uploadType === 'text' && !description.trim()) return setStatus('Text eingeben.');
 
     setStatus('Verarbeitung läuft...');
 
@@ -43,14 +43,14 @@ export default function AdminUpload() {
         if (!imgResponse.ok) throw new Error('Bild-Upload fehlgeschlagen.');
 
         // --- 2. CAPTION HOCHLADEN (Falls eingetippt) ---
-        if (blogText.trim() !== '') {
+        if (description.trim() !== '') {
           const jsonFilename = `${baseName}.json`;
           const jsonUrl = `/api/upload?filename=${encodeURIComponent(jsonFilename)}&contentType=application/json&category=${category}`;
           
           const jsonResponse = await fetch(jsonUrl, {
             method: 'POST',
             headers: { 'x-admin-password': currentPassword },
-            body: JSON.stringify({ caption: blogText }), // Wir speichern es als "caption"
+            body: JSON.stringify({ caption: description }),
           });
           
           if (!jsonResponse.ok) throw new Error('Caption-Upload fehlgeschlagen.');
@@ -67,7 +67,7 @@ export default function AdminUpload() {
         const response = await fetch(url, {
           method: 'POST',
           headers: { 'x-admin-password': currentPassword },
-          body: JSON.stringify({ text: blogText }), // Reiner Text
+          body: JSON.stringify({ text: description }),
         });
 
         if (!response.ok) throw new Error('Text-Post fehlgeschlagen.');
@@ -77,7 +77,7 @@ export default function AdminUpload() {
       // Felder zurücksetzen
       setFile(null);
       setCustomName('');
-      setBlogText('');
+      setDescription('');
     } catch (error) {
       setStatus((error as Error).message);
     }
@@ -105,7 +105,6 @@ export default function AdminUpload() {
             if (nextCategory !== 'dashboard') setUploadType('image');
           }} style={{ padding: '10px', fontSize: '16px' }}>
             <option value="food">Food</option>
-            <option value="places">Places</option>
             <option value="rides">Rides</option>
             <option value="dashboard">Dashboard(Blog)</option>
           </select>
@@ -132,11 +131,11 @@ export default function AdminUpload() {
         )}
 
         <textarea 
-          placeholder={uploadType === 'image' ? "Bild-Beschriftung / Caption schreiben (optional)..." : "Schreibe hier deinen Blogtext rein..."} 
+          placeholder={uploadType === 'image' ? "Beschreibung unter dem Bild (optional)..." : "Schreibe hier deinen Blogtext rein..."}
           rows={5}
           style={{ padding: '10px', fontSize: '16px', fontFamily: 'sans-serif', resize: 'vertical' }}
-          value={blogText}
-          onChange={(e) => setBlogText(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
 
         <button type="submit" style={{ padding: '12px', background: '#22c55e', color: '#fff', border: 'none', borderRadius: '5px', fontSize: '16px', fontWeight: 'bold' }}>

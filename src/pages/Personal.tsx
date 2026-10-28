@@ -8,17 +8,12 @@ const noteCategories = [
   {
     id: 'rides',
     title: 'Rides',
-    image: '/notes-icons/motorrad-bild.jpg',
+    image: '/suzuki-sv-seite.png',
   },
   {
     id: 'food',
     title: 'Food',
-    image: '/notes-icons/pizza1.jpg',
-  },
-  {
-    id: 'places',
-    title: 'Places',
-    image: '/notes-icons/moskau.jpg',
+    image: '/icons/pizza-icon.png',
   },
 ]
 
@@ -35,27 +30,20 @@ export function Personal() {
       <section className="personal-notes">
         <header className="notes-header">
           <p className="notes-intro-small">PERSONAL ARCHIVE</p>
-          <h1>Notes</h1>
         </header>
 
-        <div className="notes-grid" aria-label="Notizkategorien">
+        <nav className="notes-grid" aria-label="Notizkategorien">
           {noteCategories.map((category) => (
             <Link
               to={`/notes/${category.id}`}
               className="note-card"
               key={category.id}
+              aria-label={category.title}
             >
               <img src={category.image} alt="" className="note-card-image" />
-              <span className="note-card-overlay" />
-              <span className="note-card-title">{category.title}</span>
             </Link>
           ))}
-          <Link to="/bike" className="note-card">
-            <img src="/suzuki-sv-seite.png" alt="" className="note-card-image" />
-            <span className="note-card-overlay" />
-            <span className="note-card-title">Bike</span>
-          </Link>
-        </div>
+        </nav>
       </section>
 
       <Dashboard />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import './NoteCategory.css'
 
 // 1. Lokale Bilder vom PC einlesen
@@ -30,7 +30,7 @@ export function NoteCategory() {
   // 3. Handy-Bilder live von Vercel Blob laden
   useEffect(() => {
     async function fetchHandyImages() {
-      if (!categoryy) return
+      if (categoryy !== 'food' && categoryy !== 'rides') return
       try {
         const response = await fetch(`/api/list?category=${categoryy}`)
         if (response.ok) {
@@ -70,6 +70,10 @@ export function NoteCategory() {
 
   const imageItems = sortedBlobImages.filter((imageObj) => imageObj?.type !== 'text')
 
+  if (categoryy !== 'food' && categoryy !== 'rides') {
+    return <Navigate to="/personal" replace />
+  }
+
   // Bestimmt, aus welcher Liste das vergrößerte Bild kommt
   const currentActiveImages = isBlobSelected ? imageItems : localImages
   const activeBlobImage = isBlobSelected && selectedIndex !== null
@@ -84,22 +88,24 @@ export function NoteCategory() {
       </header>
 
       {/* OBEN: Die originale, horizontale PC-Bilder-Galerie */}
-      <section className="horizontal-gallery">
-        <div className="horizontal-track">
-          {repeatedLocalImages.map((image, index) => (
-            <img
-              key={`local-${image}-${index}`}
-              src={image}
-              alt={`${title} Bild ${index + 1}`}
-              className="horizontal-image"
-              onClick={() => {
-                setIsBlobSelected(false) // Sagt dem Modal: PC-Bilder nutzen
-                setSelectedIndex(index % localImages.length)
-              }}
-            />
-          ))}
-        </div>
-      </section>
+      {repeatedLocalImages.length > 0 && (
+        <section className="horizontal-gallery">
+          <div className="horizontal-track">
+            {repeatedLocalImages.map((image, index) => (
+              <img
+                key={`local-${image}-${index}`}
+                src={image}
+                alt={`${title} Bild ${index + 1}`}
+                className="horizontal-image"
+                onClick={() => {
+                  setIsBlobSelected(false)
+                  setSelectedIndex(index % localImages.length)
+                }}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* UNTEN: Die Handy-Bilder Galerie */}
       {imageItems.length > 0 && (
@@ -123,8 +129,10 @@ export function NoteCategory() {
                 </div>
                 <p className="note-image-meta">
                   {new Date(imageObj.uploadedAt).toLocaleDateString('de-DE')}
-                  {imageObj.caption && ` · ${imageObj.caption}`}
                 </p>
+                {imageObj.caption && (
+                  <p className="note-image-description">{imageObj.caption}</p>
+                )}
               </div>
             ))}
           </div>
