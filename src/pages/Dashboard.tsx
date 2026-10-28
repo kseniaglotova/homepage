@@ -39,7 +39,8 @@ export function Dashboard() {
         <h1>Dashboard</h1>
       </header>
 
-      <div className="dashboard-grid">
+      <div className="dashboard-slider">
+        <div className="dashboard-track">
         {blogItems.length === 0 ? (
           <p className="dashboard-empty">Noch keine Beiträge im Dashboard vorhanden.</p>
         ) : (
@@ -63,6 +64,7 @@ export function Dashboard() {
               </div>
             </article>
           ))) }
+        </div>
       </div>
     </section>
   )
