@@ -16,7 +16,7 @@ export function DineOut() {
   useEffect(() => {
     async function loadImages() {
       try {
-        const response = await fetch('/api/list?category=dineout')
+        const response = await fetch('/api/list?category=dineou')
         if (!response.ok) {
           throw new Error('Konnte nicht geladen werden.')
         }
