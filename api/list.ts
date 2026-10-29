@@ -11,7 +11,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
 
   try {
     const isDashboard = category === 'dashboard';
-    const isNoteCategory = ['food', 'mobility'].includes(category);
+    const isNoteCategory = ['food', 'mobility','dineout'].includes(category);
     if (!isDashboard && !isNoteCategory) {
       return response.status(400).json({ error: 'Ungültige Kategorie' });
     }
