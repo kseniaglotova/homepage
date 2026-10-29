@@ -6,6 +6,7 @@ import './App.css'
 import { Food } from './pages/Food'
 import { Mobility } from './pages/Mobility'
 import { Bike } from './pages/Bike'
+import { DineOut } from './pages/DineOut'
 
 import AdminUpload from './pages/AdminUpload'
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/personal" element={<Personal />} />
         <Route path="/food" element={<Food />} />
+        <Route path="/dine-out" element={<DineOut />} />
         <Route path="/mobility" element={<Mobility />} />
         <Route path="/notes/food" element={<Navigate to="/food" replace />} />
         <Route path="/notes/rides" element={<Navigate to="/mobility" replace />} />

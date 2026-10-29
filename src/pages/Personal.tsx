@@ -15,6 +15,11 @@ const noteCategories = [
     title: 'Food',
     image: '/icons/pizza-icon.png',
   },
+    {
+    id: 'dine-out',
+    title: 'Dine Out',
+    image: '/icons/steak-stg-icon.png',
+  },
 ]
 
 export function Personal() {

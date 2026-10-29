@@ -30,7 +30,7 @@ body {
 }
 
 .nav-link.active {
-  background: var(--accent);
+  background: #000;
   color: var(--surface);
 }
 
