@@ -1,39 +1,33 @@
 import { useEffect, useState } from 'react'
-import './Food.css'
+import './DineOut.css'
 
 type DineOutImage = {
   url: string
-  uploadedAt: string
-  type?: 'image' | 'text'
   caption?: string
 }
 
 export function DineOut() {
   const [images, setImages] = useState<DineOutImage[]>([])
-  const [selectedImage, setSelectedImage] = useState<DineOutImage | null>(null)
-  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     async function loadImages() {
       try {
-        const response = await fetch('/api/list?category=dineou')
+        const response = await fetch('/api/list?category=dineout')
+
         if (!response.ok) {
-          throw new Error('Konnte nicht geladen werden.')
+          throw new Error('Dine-Out-Bilder konnten nicht geladen werden.')
         }
 
-        const items = await response.json() as Array<DineOutImage | string>
-        const formattedImages = items
-          .map((item) => typeof item === 'string'
-            ? { url: item, uploadedAt: '' }
-            : item)
-          .filter((item) => item.type !== 'text')
-          .sort((a, b) => Date.parse(b.uploadedAt) - Date.parse(a.uploadedAt))
-
-        setImages(formattedImages)
+        const imageList = await response.json() as DineOutImage[]
+        setImages(imageList)
       } catch (loadError) {
         setError(loadError instanceof Error
           ? loadError.message
-          : 'Konnte nicht geladen werden.')
+          : 'Dine-Out-Bilder konnten nicht geladen werden.')
+      } finally {
+        setIsLoading(false)
       }
     }
 
@@ -41,62 +35,34 @@ export function DineOut() {
   }, [])
 
   return (
-    <main className="food-page">
-      <header className="food-header">
-        <h1>DineOut</h1>
+    <main className="dineout-page">
+      <header className="dineout-header">
+        <h1>Dine Out</h1>
       </header>
 
-      {error && <p className="food-message" role="alert">{error}</p>}
-      {!error && images.length === 0 && (
-        <p className="food-message">Noch keine Bilder vorhanden.</p>
+      {isLoading && <p className="dineout-message">Bilder werden geladen...</p>}
+      {!isLoading && error && (
+        <p className="dineout-message" role="alert">{error}</p>
+      )}
+      {!isLoading && !error && images.length === 0 && (
+        <p className="dineout-message">Noch keine Bilder vorhanden.</p>
       )}
 
-      {images.length > 0 && (
-        <section className="food-grid" aria-label="Food-Bilder">
-          {images.map((image, index) => (
-            <article className="food-card" key={`${image.url}-${index}`}>
-              <button
-                type="button"
-                className="food-image-button"
-                onClick={() => setSelectedImage(image)}
-                aria-label={`Bild ${index + 1} vergrößern`}
-              >
-                <img src={image.url} alt={image.caption || `Food-Bild ${index + 1}`} />
-              </button>
-              {image.caption && <p className="food-description">{image.caption}</p>}
-              {image.uploadedAt && (
-                <div className="food-card-footer">
-                  <span>🗓️ {new Date(image.uploadedAt).toLocaleDateString('de-DE')}</span>
-                </div>
-              )}
+      {!isLoading && !error && images.length > 0 && (
+        <section className="dineout-grid" aria-label="Dine-Out-Bilder">
+          {images.map((image) => (
+            <article className="dineout-card" key={image.url}>
+              <img
+                className="dineout-image"
+                src={image.url}
+                alt={image.caption || 'Dine-Out-Bild'}
+              />
+              <div className="dineout-caption">
+                {image.caption && <p>{image.caption}</p>}
+              </div>
             </article>
           ))}
         </section>
-      )}
-
-      {selectedImage && (
-        <div
-          className="food-modal"
-          onClick={() => setSelectedImage(null)}
-          role="presentation"
-        >
-          <button
-            type="button"
-            className="food-modal-close"
-            onClick={() => setSelectedImage(null)}
-            aria-label="Bild schließen"
-          >
-            ×
-          </button>
-          <img
-            src={selectedImage.url}
-            alt={selectedImage.caption || 'Food-Bild vergrößert'}
-            onClick={(event) => event.stopPropagation()}
-          />
-          {selectedImage.caption && (
-            <p onClick={(event) => event.stopPropagation()}>{selectedImage.caption}</p>
-          )}
-        </div>
       )}
     </main>
   )

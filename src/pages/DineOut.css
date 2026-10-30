@@ -1,0 +1,88 @@
+.dineout-page {
+  min-height: calc(100vh - 70px);
+  padding: 56px 0 80px;
+  background: var(--page-background);
+  color: var(--text);
+}
+
+.dineout-header,
+.dineout-grid,
+.dineout-message {
+  width: min(1180px, calc(100% - 64px));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.dineout-header {
+  margin-bottom: 30px;
+}
+
+.dineout-header h1 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+}
+
+.dineout-message {
+  color: var(--muted);
+}
+
+.dineout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.dineout-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 4px 12px rgba(23, 43, 64, 0.05);
+}
+
+.dineout-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.dineout-caption {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.dineout-caption p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .dineout-header,
+  .dineout-grid,
+  .dineout-message {
+    width: calc(100% - 36px);
+  }
+
+  .dineout-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .dineout-grid {
+    grid-template-columns: 1fr;
+  }
+}

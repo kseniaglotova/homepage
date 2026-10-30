@@ -17,7 +17,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
     }
 
     const prefixes = isDashboard
-      ? ['dashboard/', 'notes/dashboard/']
+      ? ['dashboard/']
       : category === 'mobility'
         ? ['notes/mobility/', 'notes/rides/']
         : [`notes/${category}/`];
