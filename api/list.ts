@@ -38,7 +38,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
     }));
 
     const formattedBlobs = blobs.flatMap((blob) => {
-      if (blob.url.endsWith('.json')) {
+      if (blob.url.endsWith('.json') || blob.pathname.endsWith('/')) {
         return [];
       }
 
