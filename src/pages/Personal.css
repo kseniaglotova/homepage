@@ -96,10 +96,6 @@
 }
 
 @media (max-width: 600px) {
-  .personal-page {
-    padding-bottom: 20px;
-  }
-
   .personal-page > * {
     width: calc(100% - 20px);
   }

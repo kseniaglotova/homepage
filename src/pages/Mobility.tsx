@@ -1,4 +1,5 @@
 import './Mobility.css'
+import { Link } from 'react-router-dom'
 
 const imageModules = import.meta.glob(
   '../assets/mobility/*.{jpg,jpeg,png,webp}',
@@ -14,7 +15,12 @@ export function Mobility() {
       <header className="mobility-header">
         <h1>Mobility</h1>
       </header>
-
+      <section className="bike-png">
+        <img src="suzuki-sv-seite.png" alt="Suzuki SV 650 von seite"></img>
+        <Link to="/bike">
+        <img src="suzuki-sv-vorne.png" alt="Suzuki SV 650 von vorne"></img>
+        </Link>
+      </section>
       {images.length > 0 && (
         <section className="mobility-gallery" aria-label="Mobility-Bilder">
           <div className="mobility-track">
@@ -29,6 +35,7 @@ export function Mobility() {
           </div>
         </section>
       )}
+      
     </main>
   )
 }
