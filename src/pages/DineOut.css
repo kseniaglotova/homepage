@@ -44,7 +44,7 @@
   transition: transform 180ms ease;
 }
 .dineout-card:hover {
-  transform: scale(1.2)
+  transform: scale(1.1)
 }
 
 .dineout-image {

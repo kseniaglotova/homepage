@@ -44,7 +44,7 @@
   transition: transform 180ms ease;
 }
 .food-card:hover {
-  transform: scale(1.2)
+  transform: scale(1.1)
 }
 
 .food-image-button {
