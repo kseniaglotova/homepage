@@ -44,7 +44,7 @@
 }
 
 .note-card:hover {
-  transform: translateY(-4px);
+  transform: scale(1.2);
 }
 
 .note-card:focus-visible {
