@@ -101,6 +101,8 @@
   max-width: min(900px, 90vw);
   max-height: 78vh;
   object-fit: contain;
+  border-radius: 12px;
+  border: 2px solid var(--line);
 }
 
 .food-modal > p {
