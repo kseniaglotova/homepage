@@ -41,6 +41,10 @@
   border-radius: 14px;
   background: var(--surface);
   box-shadow: 0 4px 12px rgba(23, 43, 64, 0.05);
+  transition: transform 180ms ease;
+}
+.dineout-card:hover {
+  transform: scale(1.2)
 }
 
 .dineout-image {
