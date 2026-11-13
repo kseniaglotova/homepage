@@ -138,6 +138,9 @@
   .dashboard-card {
     flex-basis: calc((100% - 36px) / 3);
   }
+  .dasbboard-card:hover {
+  transform: none;
+  }
 }
 
 @media (max-width: 560px) {
