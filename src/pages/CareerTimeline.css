@@ -65,7 +65,8 @@
 
 .career-timeline-card {
   min-height: 150px;
-  padding: 20px;
+  padding: 0;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--surface);
@@ -81,7 +82,14 @@
 }
 
 .career-timeline-title {
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+  min-height: 148px;
+  padding: 20px 20px 12px;
   border: 0;
   background: transparent;
   color: var(--text);
@@ -90,6 +98,15 @@
   font-weight: 700;
   text-align: left;
   cursor: pointer;
+}
+
+.career-timeline-title[aria-expanded="true"] {
+  min-height: 0;
+  padding-bottom: 8px;
+}
+
+.career-timeline-detail {
+  padding: 0 20px 20px;
 }
 
 .career-timeline-title:hover {
@@ -102,7 +119,7 @@
 }
 
 .career-timeline-detail p {
-  margin: 12px 0 0;
+  margin: 0;
   color: var(--muted);
   line-height: 1.5;
 }

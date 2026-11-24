@@ -50,8 +50,6 @@ export function CareerTimeline() {
                 return (
                     <li className="career-timeline-item" key={event.id}>
                 <article className="career-timeline-card">
-                  <p className="career-timeline-date">{event.date}</p>
-
                   <button
                     className="career-timeline-title"
                     type="button"
@@ -61,7 +59,8 @@ export function CareerTimeline() {
                       setOpenEventId(isOpen ? null : event.id)
                     }
                   >
-                    {event.title}
+                    <span className="career-timeline-date">{event.date}</span>
+                    <span>{event.title}</span>
                   </button>
 
                   <div
