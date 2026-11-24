@@ -7,7 +7,9 @@
   font-size: clamp(1.6rem, 3vw, 2.5rem);
   letter-spacing: -0.05em;
 }
-
+.section-kicker {
+  color: var(--accent);
+}
 .career-timeline-scroll {
   width: 100%;
   overflow-x: auto;

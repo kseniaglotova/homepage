@@ -73,98 +73,13 @@
   letter-spacing: -0.03em;
 }
 
-.button-section {
-  width: min(1180px, calc(100% - 64px));
-  margin: 0 auto;
-  padding: 70px 0;
-}
-
-.section-heading {
-  justify-content: space-between;
-  align-items: baseline;
-  display: flex;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--line);
-}
-
-.section-heading h2 {
-    margin: 0;
-  font-size: clamp(1.6rem, 3vw, 2.5rem);
-  letter-spacing: -0.05em;
-}
-
-.button-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.category-box {
-  position: relative;
-  min-height: 50px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  display: flex;
-  color: var(--text);
-  flex-direction: column;
-  justify-content: space-between;
-  background: var(--surface);
-  text-decoration: none;
-  animation: card-in 0.55s ease-out both;
-  animation-delay: calc(var(--card-index) * 70ms);
-  transition: transform 0.25s ease, background 0.25s ease;
-}
-
-.category-box:hover {
-  transform: translateY(-7px);
-  color: #fff;
-  background: var(--accent);
-}
-
-.category-number {
-  color: var(--muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-}
-
-.category-label {
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.category-arrow {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  font-size: 1.25rem;
-  transition: transform 0.25s ease;
-}
-
-.category-box:hover .category-arrow {
-  transform: translate(3px, -3px);
-}
-
-.category-box:hover .category-number {
-  color: #fff;
-}
 
 @keyframes rise-in {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes card-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 
-@media (max-width: 900px) {
-  .button-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
 
 @media (max-width: 700px) {
   .hero-content {
@@ -188,18 +103,4 @@
     font-size: clamp(3.8rem, 18vw, 6rem);
   }
 
-  .button-section {
-    width: min(100% - 36px, 560px);
-    padding: 52px 0 64px;
-  }
-
-  .button-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 430px) {
-  .button-grid {
-    grid-template-columns: 1fr;
-  }
 }

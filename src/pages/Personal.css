@@ -1,16 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 
 .personal-page {
+  width: 100%;
+  padding-bottom: 20px;
   color: var(--text);
   background: var(--page-background);
   font-family: "DM Sans", sans-serif;
-  padding-bottom: 20px;
-  width: 100%;
 }
+
 .personal-page,
 .personal-page * {
   box-sizing: border-box;
 }
+
 .personal-page > * {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
@@ -21,12 +23,12 @@
 }
 
 .hero-section {
-  padding: 20px 0 0;
+  padding-top: 20px;
 }
 
 .hero-section::before {
-  content: "PERSONAL PAGE / 2026";
   color: var(--accent);
+  content: "PERSONAL PAGE / 2026";
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -50,8 +52,7 @@
 }
 
 .info-card {
-  margin-bottom: 24px;
-  margin-top: 24px;
+  margin: 24px auto;
   padding: 32px;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -69,7 +70,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin: 0 0 24px;
+  margin: 0;
   font-size: 1.8rem;
   letter-spacing: -0.04em;
 }
@@ -78,6 +79,47 @@
   color: var(--accent);
   content: "→";
   font-size: 1.4rem;
+}
+
+.info-card-collapsible {
+  padding: 0;
+}
+
+.info-card-collapsible h2::before {
+  content: none;
+}
+
+.info-card-toggle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 32px 32px 24px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.info-card-toggle::before {
+  color: var(--accent);
+  content: "→";
+  font-size: 1.4rem;
+}
+
+.info-card-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.info-card-content {
+  padding: 0 32px 32px;
+}
+
+.info-card-content ul {
+  margin-top: 0;
 }
 
 .future-section {
